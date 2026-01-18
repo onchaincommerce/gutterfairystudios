@@ -1,9 +1,7 @@
-import Link from "next/link";
-
-export default function AboutSection() {
+export default function ThriftSection() {
   return (
     <section
-      id="about"
+      id="thrift"
       className="min-h-screen flex items-center relative py-24 px-6"
     >
       {/* Content */}
@@ -11,40 +9,37 @@ export default function AboutSection() {
         {/* Section label */}
         <div className="mb-12">
           <span className="font-body text-sm font-semibold tracking-wider text-[#ff3366] uppercase">
-            ABOUT
+            THRIFT
           </span>
           <div className="w-20 h-1 bg-[#ff3366] mt-3" />
         </div>
 
-        {/* Main text - brief version */}
+        {/* Main content */}
         <div className="space-y-8">
-          <h2 className="font-body text-4xl sm:text-5xl md:text-6xl font-bold text-[#f0e6d3] leading-tight uppercase">
-            IMPERFECT BY DESIGN
+          <h2 className="font-body text-4xl sm:text-5xl md:text-6xl font-bold text-[#f0e6d3] leading-tight">
+            Shop the Gutter
           </h2>
 
           <div className="text-[#f0e6d3] font-body space-y-4">
             <p className="text-base leading-relaxed">
-              Gutter Fairy started when I got tired of trying to fit in.
+              We find forgotten treasures, clean each piece, and rehome them so they get worn again.
             </p>
             <p className="text-base leading-relaxed">
-              Today I search the gutter for secondhand gems, design custom patches, and stitch each one with you in mind.
-            </p>
-            <p className="text-base leading-relaxed">
-              Everything is slow, handmade, and meant to keep good textiles in rotation.
-            </p>
-            <p className="text-base leading-relaxed">
-              Welcome to my secondhand chaos studio.
+              Because saving the planet shouldn't feel dirty.
             </p>
           </div>
 
-          {/* Learn More button */}
+          {/* CTA button */}
           <div className="pt-4">
-            <Link
-              href="/about"
+            <a
+              href="https://www.depop.com/gutterfairystudios/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-block font-body text-sm font-semibold tracking-wide px-8 py-4 bg-[#ff3366] text-[#f0e6d3] hover:bg-[#ff3366]/80 transition-all duration-300 uppercase"
             >
-              MEET THE FAIRY
-            </Link>
+              THRIFT
+              <span className="ml-2 text-xs">↗</span>
+            </a>
           </div>
         </div>
       </div>

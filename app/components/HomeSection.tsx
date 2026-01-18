@@ -67,7 +67,7 @@ export default function HomeSection() {
 
           {/* Title with typewriter effect - fixed positioning to prevent glitch */}
           <h1
-            className="font-body text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-[#f0e6d3] mb-6 drop-shadow-[2px_2px_0_rgba(0,0,0,0.8)] tracking-tight leading-none sm:whitespace-nowrap"
+            className="font-body text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-[#f0e6d3] mb-8 drop-shadow-[2px_2px_0_rgba(0,0,0,0.8)] tracking-tight leading-none sm:whitespace-nowrap"
             aria-label={fullText}
           >
             <span className="relative inline-block">
@@ -87,22 +87,12 @@ export default function HomeSection() {
           </h1>
 
           {/* Tagline */}
-          <p className="font-body text-xl sm:text-2xl font-semibold tracking-wider text-[#ff3366] mb-2 uppercase">
-            Curated secondhand + Made to Order Patches
+          <p className="font-body text-xl sm:text-2xl font-semibold tracking-wider text-[#ff3366] mb-4">
+            Secondhand fashion + custom patches
           </p>
-          <p className="font-body text-xs text-[#f0e6d3]/70 mb-12">
-            Made in Reno
+          <p className="font-body text-xs text-[#f0e6d3]/70">
+            Reno made
           </p>
-
-          {/* CTA - Shop button */}
-        <a
-          href="https://www.depop.com/gutterfairystudios/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block font-body text-sm font-semibold tracking-wide px-8 py-4 bg-[#ff3366] text-[#f0e6d3] hover:bg-[#ff3366]/80 transition-all duration-300 uppercase"
-        >
-          SHOP
-        </a>
         </div>
       </div>
     </section>

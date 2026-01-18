@@ -33,18 +33,22 @@ export default function DesignsSection() {
           <div className="w-20 h-1 bg-[#ff3366] mt-3" />
         </div>
 
-        {/* Description text - wrap on mobile, no scrollbar */}
+        {/* How it works */}
         <div className="mb-8">
-          <p className="font-body text-xs sm:text-sm text-[#f0e6d3]/90 leading-relaxed">
-            Email{" "}
-            <a
-              href="mailto:gutterfairystudios@gmail.com"
-              className="text-[#ff3366] hover:text-[#f0e6d3] underline"
-            >
-              gutterfairystudios@gmail.com
-            </a>{" "}
-            to get a design embroidered on your item you purchase from me
-          </p>
+          <h3 className="font-body text-2xl sm:text-3xl font-bold text-[#f0e6d3] mb-6">
+            How it works
+          </h3>
+          <ol className="font-body text-base text-[#f0e6d3] space-y-2 list-decimal list-inside mb-6">
+            <li>Pick a design (or bring your own idea)</li>
+            <li>Choose your colors and the size </li>
+            <li>I stich it to order</li>
+          </ol>
+          <a
+            href="#"
+            className="inline-block font-body text-sm font-semibold tracking-wide px-8 py-4 bg-[#ff3366] text-[#f0e6d3] hover:bg-[#ff3366]/80 transition-all duration-300 uppercase"
+          >
+            Order a patch
+          </a>
         </div>
 
         {/* Grid - show only 3 designs on home */}

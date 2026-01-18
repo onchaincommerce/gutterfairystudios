@@ -9,7 +9,7 @@ const navLinks = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/designs", label: "Designs" },
-  { href: "https://www.depop.com/gutterfairystudios/", label: "Shop", external: true },
+  { href: "https://www.depop.com/gutterfairystudios/", label: "Thrift", external: true },
 ];
 
 export default function Navigation() {
@@ -92,7 +92,7 @@ export default function Navigation() {
                 (pathname === link.href ||
                   (link.href !== "/" && pathname.startsWith(`${link.href}/`)));
               const baseClass = "font-body text-sm font-semibold tracking-wide transition-colors uppercase";
-              const colorClass = link.label === "Shop"
+              const colorClass = link.label === "Thrift"
                 ? "text-[#f0e6d3] hover:text-[#ff3366]"
                 : isActive
                 ? "text-[#ff3366]"
@@ -167,7 +167,7 @@ export default function Navigation() {
               (pathname === link.href ||
                 (link.href !== "/" && pathname.startsWith(`${link.href}/`)));
             const baseClass = "font-body text-lg font-semibold transition-colors uppercase tracking-wide";
-            const colorClass = link.label === "Shop"
+            const colorClass = link.label === "Thrift"
               ? "text-[#f0e6d3] hover:text-[#ff3366]"
               : isActive
               ? "text-[#ff3366]"
