@@ -87,8 +87,11 @@ export default function HomeSection() {
           </h1>
 
           {/* Tagline */}
-          <p className="font-body text-xl sm:text-2xl font-semibold tracking-wider text-[#ff3366] mb-12 uppercase">
-            HANDMADE CHAOS
+          <p className="font-body text-xl sm:text-2xl font-semibold tracking-wider text-[#ff3366] mb-2 uppercase">
+            Curated secondhand + Made to Order Patches
+          </p>
+          <p className="font-body text-xs text-[#f0e6d3]/70 mb-12">
+            Made in Reno
           </p>
 
           {/* CTA - Shop button */}
