@@ -71,15 +71,16 @@ export default function Navigation() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
+          <Link href="/" className="flex items-center gap-3 group px-2 py-2 rounded transition-all duration-200 hover:bg-[#ff3366]/10">
             <Image
               src="/fairy.png"
               alt="Gutter Fairy"
               width={36}
               height={36}
               className="group-hover:drop-shadow-[0_0_8px_rgba(255,51,102,0.6)] transition-all"
+              draggable={false}
             />
-            <span className="font-body text-lg font-bold text-[#f0e6d3] hidden sm:block uppercase tracking-wide">
+            <span className="font-body text-lg font-bold text-[#f0e6d3] hidden sm:block uppercase tracking-wide group-hover:text-[#ff3366] transition-colors">
               GUTTER FAIRY
             </span>
           </Link>
@@ -91,12 +92,12 @@ export default function Navigation() {
                 !link.external &&
                 (pathname === link.href ||
                   (link.href !== "/" && pathname.startsWith(`${link.href}/`)));
-              const baseClass = "font-body text-sm font-semibold tracking-wide transition-colors uppercase";
+              const baseClass = "font-body text-sm font-semibold tracking-wide transition-all duration-200 uppercase px-3 py-2 rounded relative";
               const colorClass = link.label === "Thrift"
-                ? "text-[#f0e6d3] hover:text-[#ff3366]"
+                ? "text-[#f0e6d3] hover:text-[#ff3366] hover:bg-[#ff3366]/10"
                 : isActive
                 ? "text-[#ff3366]"
-                : "text-[#f0e6d3] hover:text-[#ff3366]";
+                : "text-[#f0e6d3] hover:text-[#ff3366] hover:bg-[#ff3366]/10";
 
               if (link.external) {
                 return (
@@ -166,12 +167,12 @@ export default function Navigation() {
               !link.external &&
               (pathname === link.href ||
                 (link.href !== "/" && pathname.startsWith(`${link.href}/`)));
-            const baseClass = "font-body text-lg font-semibold transition-colors uppercase tracking-wide";
+            const baseClass = "font-body text-lg font-semibold transition-all duration-200 uppercase tracking-wide px-4 py-3 rounded relative";
             const colorClass = link.label === "Thrift"
-              ? "text-[#f0e6d3] hover:text-[#ff3366]"
+              ? "text-[#f0e6d3] hover:text-[#ff3366] hover:bg-[#ff3366]/10"
               : isActive
               ? "text-[#ff3366]"
-              : "text-[#f0e6d3] hover:text-[#ff3366]";
+              : "text-[#f0e6d3] hover:text-[#ff3366] hover:bg-[#ff3366]/10";
             const sharedStyle = {
               animation: isOpen ? `fadeInUp 0.3s ease forwards` : "none",
               animationDelay: `${index * 0.05}s`,

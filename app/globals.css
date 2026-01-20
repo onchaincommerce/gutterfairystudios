@@ -87,6 +87,18 @@
   cursor: none !important;
 }
 
+/* Allow pointer cursor on interactive elements */
+a,
+button {
+  cursor: pointer !important;
+}
+
+/* Allow text cursor for inputs */
+input,
+textarea {
+  cursor: text !important;
+}
+
 html {
   scroll-behavior: smooth;
 }

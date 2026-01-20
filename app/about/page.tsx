@@ -19,27 +19,40 @@ export default function AboutPage() {
         <section className="min-h-screen flex items-center relative py-24 px-6">
           {/* Content */}
           <div className="relative z-10 max-w-4xl mx-auto bg-black/45 backdrop-blur-sm border border-white/10 p-8 sm:p-10">
-            {/* Section label */}
-            <div className="mb-12">
-              <span className="font-body text-sm font-semibold tracking-wider text-[#ff3366] uppercase">
-                ABOUT
-              </span>
-              <div className="w-20 h-1 bg-[#ff3366] mt-3" />
-            </div>
-
             {/* Main text - full version */}
             <div className="space-y-8">
+              {/* Mission Section */}
+              <div className="pb-8">
+                <div className="mb-6">
+                  <span className="font-body text-sm font-semibold tracking-wider text-[#ff3366] uppercase">
+                    MISSION
+                  </span>
+                  <div className="w-20 h-1 bg-[#ff3366] mt-3" />
+                </div>
+                <p className="font-body text-2xl sm:text-3xl md:text-4xl font-bold text-[#f0e6d3] leading-relaxed">
+                  Keep textiles in rotation and make secondhand feel like self-expression again.
+                </p>
+              </div>
+
+              {/* Section label */}
+              <div className="mb-12">
+                <span className="font-body text-sm font-semibold tracking-wider text-[#ff3366] uppercase">
+                  ABOUT
+                </span>
+                <div className="w-20 h-1 bg-[#ff3366] mt-3" />
+              </div>
+
               <h1 className="font-body text-5xl sm:text-6xl md:text-7xl font-bold text-[#f0e6d3] leading-tight uppercase">
                 RECLAIM YOUR MAGIC
               </h1>
 
               <div className="text-[#f0e6d3] font-body space-y-6">
+              <p className="text-base leading-relaxed">
+                  Gutter Fairy exists because I want people to dress up again (not to fit in).
+                </p>
+
                 <p className="text-base leading-relaxed">
                   Most designs start as a sketch, and each piece is something someone else gave up on.
-                </p>
-                
-                <p className="text-base leading-relaxed">
-                  Gutter Fairy exists because I want people to dress up again (not to fit in).
                 </p>
                 
                 <p className="text-base leading-relaxed">
@@ -67,17 +80,6 @@ export default function AboutPage() {
                 <div className="flex-1 h-px bg-gradient-to-r from-[#ff3366] to-transparent" />
                 <span className="font-body text-3xl text-[#ff3366]">*</span>
                 <div className="flex-1 h-px bg-gradient-to-l from-[#ff3366] to-transparent" />
-              </div>
-
-              {/* Values */}
-              <div className="grid grid-cols-3 gap-4 pt-4">
-                {["SAVED", "REWORKED", "CUSTOMIZED"].map((value) => (
-                  <div key={value} className="text-center">
-                    <span className="font-body text-xs sm:text-sm font-semibold text-[#f0e6d3] uppercase tracking-wide">
-                      {value}
-                    </span>
-                  </div>
-                ))}
               </div>
             </div>
           </div>

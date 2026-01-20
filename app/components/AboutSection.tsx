@@ -24,16 +24,13 @@ export default function AboutSection() {
 
           <div className="text-[#f0e6d3] font-body space-y-4">
             <p className="text-base leading-relaxed">
-              Gutter Fairy started when I got tired of trying to fit in.
+              Gutter Fairy started because I love thrifting. At first I wanted to combat textile waste, but reselling didn't feel like enough. The reality is there are just so many outdated styles sitting in the gutter.
             </p>
             <p className="text-base leading-relaxed">
-              Today I search the gutter for secondhand gems, design custom patches, and stitch each one with you in mind.
+              Now it's thrifted gems, reworked ideas, and patches stitched to order — turning overlooked pieces into something modern again.
             </p>
             <p className="text-base leading-relaxed">
-              Everything is slow, handmade, and meant to keep good textiles in rotation.
-            </p>
-            <p className="text-base leading-relaxed">
-              Welcome to my secondhand chaos studio.
+              Welcome to my little secondhand chaos studio.
             </p>
           </div>
 

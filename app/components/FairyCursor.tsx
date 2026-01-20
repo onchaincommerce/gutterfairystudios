@@ -104,6 +104,7 @@ export default function FairyCursor() {
           top: position.y,
           transform: "translate(-50%, -50%)",
           opacity: isVisible ? 1 : 0,
+          willChange: "transform",
         }}
       >
         <Image
@@ -113,6 +114,7 @@ export default function FairyCursor() {
           height={48}
           className="drop-shadow-[0_0_8px_rgba(212,169,35,0.6)]"
           priority
+          draggable={false}
         />
       </div>
     </>

@@ -2,6 +2,7 @@ import Navigation from "../components/Navigation";
 import FairyCursor from "../components/FairyCursor";
 import BlastEffect from "../components/BlastEffect";
 import DesignCard from "../components/DesignCard";
+import OrderPatchButton from "../components/OrderPatchButton";
 import Footer from "../components/Footer";
 
 const allDesigns = [
@@ -62,23 +63,77 @@ export default function DesignsPage() {
             {/* Section label */}
             <div className="mb-12">
               <span className="font-body text-sm font-semibold tracking-wider text-[#ff3366] uppercase">
-                DESIGNS
+                PATCHES
               </span>
               <div className="w-20 h-1 bg-[#ff3366] mt-3" />
             </div>
 
-            {/* Description text */}
-            <div className="mb-16">
-              <p className="font-body text-sm text-[#f0e6d3]/90 leading-relaxed max-w-2xl">
-                Email{" "}
-                <a
-                  href="mailto:gutterfairystudios@gmail.com"
-                  className="text-[#ff3366] hover:text-[#f0e6d3] underline"
-                >
-                  gutterfairystudios@gmail.com
-                </a>{" "}
-                to get a design embroidered on your item you purchase from me
-              </p>
+            {/* How it works */}
+            <div className="mb-12">
+              <h2 className="font-body text-4xl sm:text-5xl md:text-6xl font-bold text-[#f0e6d3] leading-tight uppercase mb-12">
+                How it works
+              </h2>
+
+              {/* Three step blocks */}
+              <div className="grid md:grid-cols-3 gap-8 mb-8">
+                {/* Block 1: Find a patch */}
+                <div className="bg-black/30 border border-white/5 p-6 rounded">
+                  <h3 className="font-body text-xl sm:text-2xl font-bold text-[#f0e6d3] mb-4 uppercase">
+                    FIND A PATCH
+                  </h3>
+                  <p className="font-body text-sm text-[#f0e6d3]/90 leading-relaxed">
+                    Pick a design (or bring your own) to rework what you already own.
+                  </p>
+                  {/* Decorative element */}
+                  <div className="pt-6 flex items-center gap-2">
+                    <div className="flex-1 h-px bg-gradient-to-r from-[#ff3366] to-transparent" />
+                    <span className="font-body text-xl text-[#ff3366]">*</span>
+                    <div className="flex-1 h-px bg-gradient-to-l from-[#ff3366] to-transparent" />
+                  </div>
+                </div>
+
+                {/* Block 2: Customize */}
+                <div className="bg-black/30 border border-white/5 p-6 rounded">
+                  <h3 className="font-body text-xl sm:text-2xl font-bold text-[#f0e6d3] mb-4 uppercase">
+                    CUSTOMIZE
+                  </h3>
+                  <p className="font-body text-sm text-[#f0e6d3]/90 leading-relaxed">
+                    Choose your colors and the size so the patch fits like a glove.
+                  </p>
+                  {/* Decorative element */}
+                  <div className="pt-6 flex items-center gap-2">
+                    <img 
+                      src="/fairy.png" 
+                      alt="Fairy" 
+                      className="w-8 h-8 object-contain"
+                    />
+                    <div className="flex-1 h-px bg-gradient-to-r from-[#ff3366] to-transparent" />
+                    <span className="font-body text-xl text-[#ff3366]">*</span>
+                    <div className="flex-1 h-px bg-gradient-to-l from-[#ff3366] to-transparent" />
+                  </div>
+                </div>
+
+                {/* Block 3: Fairy Magic */}
+                <div className="bg-black/30 border border-white/5 p-6 rounded">
+                  <h3 className="font-body text-xl sm:text-2xl font-bold text-[#f0e6d3] mb-4 uppercase">
+                    FAIRY MAGIC
+                  </h3>
+                  <p className="font-body text-sm text-[#f0e6d3]/90 leading-relaxed">
+                    We stich to order or deliver iron on patches if you're out of town.
+                  </p>
+                  {/* Decorative element */}
+                  <div className="pt-6 flex items-center gap-2">
+                    <div className="flex-1 h-px bg-gradient-to-r from-[#ff3366] to-transparent" />
+                    <span className="font-body text-xl text-[#ff3366]">*</span>
+                    <div className="flex-1 h-px bg-gradient-to-l from-[#ff3366] to-transparent" />
+                  </div>
+                </div>
+              </div>
+
+              {/* Order a patch button */}
+              <div className="text-center mb-16">
+                <OrderPatchButton />
+              </div>
             </div>
 
             {/* Grid - all designs */}
