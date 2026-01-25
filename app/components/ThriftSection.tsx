@@ -9,7 +9,7 @@ export default function ThriftSection() {
         {/* Section label */}
         <div className="mb-12">
           <span className="font-body text-sm font-semibold tracking-wider text-[#ff3366] uppercase">
-            SECONDHAND
+            SECONDHAND CHAOS STUDIO
           </span>
           <div className="w-20 h-1 bg-[#ff3366] mt-3" />
         </div>

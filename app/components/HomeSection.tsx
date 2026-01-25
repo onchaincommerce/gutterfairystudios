@@ -88,7 +88,7 @@ export default function HomeSection() {
 
           {/* Tagline */}
           <p className="font-body text-xl sm:text-2xl font-semibold tracking-wider text-[#ff3366] mb-4">
-            Secondhand fashion + custom patches
+            Secondhand fashion + custom embroidery
           </p>
           <p className="font-body text-xs text-[#f0e6d3]/70">
             Reno made

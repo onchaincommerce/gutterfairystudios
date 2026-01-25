@@ -30,7 +30,7 @@ export default function AboutPage() {
                   <div className="w-20 h-1 bg-[#ff3366] mt-3" />
                 </div>
                 <p className="font-body text-2xl sm:text-3xl md:text-4xl font-bold text-[#f0e6d3] leading-relaxed">
-                  Keep textiles in rotation and make secondhand feel like self-expression again.
+                  Keep textiles in rotation and make dressing up about self expression again.
                 </p>
               </div>
 
@@ -47,31 +47,20 @@ export default function AboutPage() {
               </h1>
 
               <div className="text-[#f0e6d3] font-body space-y-6">
-              <p className="text-base leading-relaxed">
-                  Gutter Fairy exists because I want people to dress up again (not to fit in).
+                <p className="text-base leading-relaxed">
+                  This is a studio and a secondhand shop.
                 </p>
 
                 <p className="text-base leading-relaxed">
-                  Most designs start as a sketch, and each piece is something someone else gave up on.
+                  I hunt down pieces with good bones, clean them up, and get them back into rotation. And when you want something more personal, I stitch it.
                 </p>
-                
+
                 <p className="text-base leading-relaxed">
-                  It's time to show off what makes you special. So if you're weird, loud, shy, chaotic, rebuilding your style, or still figuring it out… welcome.
+                  My goal is to bring creatives together by hosting rework parties, collabs, and making stuff side by side.
                 </p>
 
-                <p className="text-base leading-relaxed font-semibold">
-                  Around here you'll find:
-                </p>
-
-                <ul className="space-y-2 text-base leading-relaxed list-disc list-inside pl-4">
-                  <li>Curated secondhand pieces with good bones (aka they still have a lot of life left)</li>
-                  <li>Made-to-order patches to make your "old" stuff feel new again</li>
-                  <li>Reworked experiments because I hate throwing out something that still works</li>
-                  <li>Rework parties so you can pull up, make stuff together, and keep clothes in rotation</li>
-                </ul>
-
-                <p className="text-base leading-relaxed pt-2">
-                  It's less trend-chasing, & more wear it like you mean it.
+                <p className="text-base leading-relaxed">
+                  It's time to show off what makes you special. So if you're weird, loud, shy, chaotic, rebuilding your style, or still figuring it out… welcome to the Gutter.
                 </p>
               </div>
 
@@ -106,10 +95,10 @@ export default function AboutPage() {
               {/* Block 1: Come as you are */}
               <div className="bg-black/30 border border-white/5 p-6 rounded">
                 <h3 className="font-body text-xl sm:text-2xl font-bold text-[#f0e6d3] mb-4 uppercase">
-                  Come as you are
+                  NO OVERPRODUCTION 
                 </h3>
                 <p className="font-body text-sm text-[#f0e6d3]/90 leading-relaxed">
-                Wear (and patch) what feels like you. 
+                I don’t stockpile inventory. I drop what I find and keep it small on purpose. 
                 </p>
                 {/* Decorative element */}
                 <div className="pt-6 flex items-center gap-2">
@@ -122,7 +111,7 @@ export default function AboutPage() {
               {/* Block 2: Trash to Treasure */}
               <div className="bg-black/30 border border-white/5 p-6 rounded">
                 <h3 className="font-body text-xl sm:text-2xl font-bold text-[#f0e6d3] mb-4 uppercase">
-                  Trash to Treasure
+                REWEAR AND REUSE
                 </h3>
                 <p className="font-body text-sm text-[#f0e6d3]/90 leading-relaxed">
                 Refuse to feed the machine and buy rescued pieces, re-worn on purpose.
@@ -138,10 +127,11 @@ export default function AboutPage() {
               {/* Block 3: Create Stuff */}
               <div className="bg-black/30 border border-white/5 p-6 rounded">
                 <h3 className="font-body text-xl sm:text-2xl font-bold text-[#f0e6d3] mb-4 uppercase">
-                Create Stuff
+                COMMUNITY FIRST
                 </h3>
                 <p className="font-body text-sm text-[#f0e6d3]/90 leading-relaxed">
-                Next up: rework parties, collabs, and making stuff together.
+                No mindless consumption. Events, collabs, and creative hangouts. Shopping is just a bonus.
+
                 </p>
                 {/* Decorative element */}
                 <div className="pt-6 flex items-center gap-2">

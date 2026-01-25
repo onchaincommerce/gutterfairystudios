@@ -16,7 +16,7 @@ export default function DesignCard({ title, image, description }: DesignCardProp
             src={image}
             alt={title}
             fill
-            className="object-contain p-4"
+            className="object-cover"
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center bg-[#1a1a1a]">

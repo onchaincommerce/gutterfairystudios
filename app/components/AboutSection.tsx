@@ -11,7 +11,7 @@ export default function AboutSection() {
         {/* Section label */}
         <div className="mb-12">
           <span className="font-body text-sm font-semibold tracking-wider text-[#ff3366] uppercase">
-            ABOUT
+            Curated Chaos, Sustainably Sourced
           </span>
           <div className="w-20 h-1 bg-[#ff3366] mt-3" />
         </div>
@@ -24,11 +24,9 @@ export default function AboutSection() {
 
           <div className="text-[#f0e6d3] font-body space-y-4">
             <p className="text-base leading-relaxed">
-              Gutter Fairy started because I love thrifting. At first I wanted to combat textile waste, but reselling didn't feel like enough. The reality is there are just so many outdated styles sitting in the gutter.
+              Gutter Fairy exists to combat textile waste by reworking outdated styles and embroidering the basics — bringing personality back to getting dressed.
             </p>
-            <p className="text-base leading-relaxed">
-              Now it's thrifted gems, reworked ideas, and patches stitched to order — turning overlooked pieces into something modern again.
-            </p>
+            
             <p className="text-base leading-relaxed">
               Welcome to my little secondhand chaos studio.
             </p>

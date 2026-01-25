@@ -4,17 +4,19 @@ import OrderPatchButton from "./OrderPatchButton";
 
 const designs = [
   {
-    title: "MILF",
-    image: "/milf.png",
+    title: "Curb Kisser",
+    image: "/Curb Kisser.jpg",
     description: "Embroidery design",
   },
   {
-    title: "Design 002",
-    description: "Coming soon",
+    title: "Food Kitty",
+    image: "/Food Kitty.jpg",
+    description: "Embroidery design",
   },
   {
-    title: "Design 003",
-    description: "Coming soon",
+    title: "Love to Death",
+    image: "/Love to Death.jpg",
+    description: "Embroidery design",
   },
 ];
 
@@ -29,7 +31,7 @@ export default function DesignsSection() {
         {/* Section label */}
         <div className="mb-12">
           <span className="font-body text-sm font-semibold tracking-wider text-[#ff3366] uppercase">
-            PATCHES
+            Embroidery Anything
           </span>
           <div className="w-20 h-1 bg-[#ff3366] mt-3" />
         </div>
@@ -45,10 +47,10 @@ export default function DesignsSection() {
             {/* Block 1: Pick a design */}
             <div className="bg-black/30 border border-white/5 p-6 rounded">
               <h3 className="font-body text-xl sm:text-2xl font-bold text-[#f0e6d3] mb-4 uppercase">
-              FIND A PATCH
+              BROWSE DESIGNS
               </h3>
               <p className="font-body text-sm text-[#f0e6d3]/90 leading-relaxed">
-              Pick a design (or bring your own) to rework what you already own.
+              Choose from the menu (or bring your own idea). I can turn it into a patch or embroider it onto anything you want.
               </p>
               {/* Decorative element */}
               <div className="pt-6 flex items-center gap-2">
@@ -61,18 +63,13 @@ export default function DesignsSection() {
             {/* Block 2: Customize */}
             <div className="bg-black/30 border border-white/5 p-6 rounded">
               <h3 className="font-body text-xl sm:text-2xl font-bold text-[#f0e6d3] mb-4 uppercase">
-                CUSTOMIZE
+                MADE TO ORDER
               </h3>
               <p className="font-body text-sm text-[#f0e6d3]/90 leading-relaxed">
-                Choose your colors and the size so the patch fits like a glove.
+              All designs can be customized to fit your vibe so pick the colors and any size up to 4x4 inches.
               </p>
               {/* Decorative element */}
               <div className="pt-6 flex items-center gap-2">
-                <img 
-                  src="/fairy.png" 
-                  alt="Fairy" 
-                  className="w-8 h-8 object-contain"
-                />
                 <div className="flex-1 h-px bg-gradient-to-r from-[#ff3366] to-transparent" />
                 <span className="font-body text-xl text-[#ff3366]">*</span>
                 <div className="flex-1 h-px bg-gradient-to-l from-[#ff3366] to-transparent" />
@@ -82,10 +79,10 @@ export default function DesignsSection() {
             {/* Block 3: Fairy Magic */}
             <div className="bg-black/30 border border-white/5 p-6 rounded">
               <h3 className="font-body text-xl sm:text-2xl font-bold text-[#f0e6d3] mb-4 uppercase">
-                FAIRY MAGIC
+                WE DELIVER MAGIC
               </h3>
               <p className="font-body text-sm text-[#f0e6d3]/90 leading-relaxed">
-                We stich to order or deliver iron on patches if you're out of town.
+              I make each piece with you in mind so it's shipped as a patch or stitched onto a piece you already love.
               </p>
               {/* Decorative element */}
               <div className="pt-6 flex items-center gap-2">

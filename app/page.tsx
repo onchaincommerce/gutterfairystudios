@@ -21,8 +21,8 @@ export default function Home() {
       <main>
         <HomeSection />
         <AboutSection />
-        <ThriftSection />
         <DesignsSection />
+        <ThriftSection />
       </main>
 
       {/* Footer */}
