@@ -1,28 +1,22 @@
-import Image from "next/image";
+import ContactButton from "./ContactButton";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-[#f0e6d3]/15 bg-transparent">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12">
-        <div className="flex flex-col items-center gap-6">
-          {/* Logo */}
-          <div className="flex items-center gap-3">
-            <Image
-              src="/fairy.png"
-              alt="Gutter Fairy"
-              width={32}
-              height={32}
-              className="opacity-70"
-            />
-            <span className="font-body text-xl font-bold text-[#f0e6d3]/80 uppercase tracking-wide">
-              GUTTER FAIRY
-            </span>
-          </div>
-
-          {/* Made with love */}
-          <p className="text-sm text-[#f0e6d3]/50 font-body">
-            Made with love by a 🐷
-          </p>
+    <footer id="utility-actions" className="pb-10 pt-8 sm:pt-10">
+      <div className="site-shell">
+        <div className="dock-panel">
+          <a href="#workshops" className="glossy-button w-full justify-center sm:w-auto">
+            Workshops
+          </a>
+          <a
+            href="https://www.instagram.com/gutterfairystudios/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="utility-button w-full justify-center sm:w-auto"
+          >
+            Instagram
+          </a>
+          <ContactButton className="utility-button w-full justify-center sm:w-auto" />
         </div>
       </div>
     </footer>

@@ -1,152 +1,146 @@
 import Navigation from "../components/Navigation";
 import FairyCursor from "../components/FairyCursor";
-import BlastEffect from "../components/BlastEffect";
-import Footer from "../components/Footer";
+import StickerPill from "../components/StickerPill";
+import WindowPanel from "../components/WindowPanel";
+
+const valueCards = [
+  {
+    title: "No overproduction",
+    body: "I do not stockpile inventory. I drop what I find and keep it small on purpose.",
+    note: "less waste, better weird stuff",
+    tone: "bg-[rgba(255,255,255,0.84)]",
+  },
+  {
+    title: "Rewear and reuse",
+    body: "Refuse to feed the machine and buy rescued pieces, re-worn on purpose.",
+    note: "good clothes deserve another life",
+    tone: "bg-[rgba(246,215,231,0.62)]",
+  },
+  {
+    title: "Community first",
+    body: "Events, collabs, and creative hangouts matter more than mindless consumption.",
+    note: "shopping is only part of the story",
+    tone: "bg-[rgba(207,231,245,0.66)]",
+  },
+];
+
+const studioTags = [
+  "Curated secondhand",
+  "Upcycled goods",
+  "Custom patches",
+  "Local workshops",
+];
 
 export default function AboutPage() {
   return (
     <>
-      {/* Interactive effects */}
       <FairyCursor />
-      <BlastEffect />
-
-      {/* Navigation */}
       <Navigation />
 
-      {/* Main content */}
-      <main>
-        {/* About Content Section */}
-        <section className="min-h-screen flex items-center relative py-24 px-6">
-          {/* Content */}
-          <div className="relative z-10 max-w-4xl mx-auto bg-black/45 backdrop-blur-sm border border-white/10 p-8 sm:p-10">
-            {/* Main text - full version */}
-            <div className="space-y-8">
-              {/* Mission Section */}
-              <div className="pb-8">
-                <div className="mb-6">
-                  <span className="font-body text-sm font-semibold tracking-wider text-[#ff3366] uppercase">
-                    MISSION
-                  </span>
-                  <div className="w-20 h-1 bg-[#ff3366] mt-3" />
+      <main className="pb-20 pt-6 sm:pt-8">
+        <section className="site-shell">
+          <div className="flex flex-col gap-6">
+            <div className="px-5 py-3 sm:px-8 lg:px-12 xl:px-16">
+              <div className="flex flex-col items-center gap-6 text-center sm:gap-7">
+                <div className="flex max-w-4xl flex-col items-center gap-5">
+                  <h1 className="offset-heading text-[clamp(2.9rem,8vw,5.7rem)] font-semibold leading-[0.92] text-[var(--color-ink)]">
+                    Reclaim Your Magic
+                  </h1>
+                  <p className="max-w-3xl text-base leading-8 text-[rgba(31,26,29,0.74)] sm:text-[1.02rem]">
+                    Gutter Fairy is a studio and a secondhand shop built around rescued clothes, custom stitching, and community events that make getting dressed feel personal again.
+                  </p>
                 </div>
-                <p className="font-body text-2xl sm:text-3xl md:text-4xl font-bold text-[#f0e6d3] leading-relaxed">
-                  Keep textiles in rotation and make dressing up about self expression again.
-                </p>
-              </div>
-
-              {/* Section label */}
-              <div className="mb-12">
-                <span className="font-body text-sm font-semibold tracking-wider text-[#ff3366] uppercase">
-                  ABOUT
-                </span>
-                <div className="w-20 h-1 bg-[#ff3366] mt-3" />
-              </div>
-
-              <h1 className="font-body text-5xl sm:text-6xl md:text-7xl font-bold text-[#f0e6d3] leading-tight uppercase">
-                RECLAIM YOUR MAGIC
-              </h1>
-
-              <div className="text-[#f0e6d3] font-body space-y-6">
-                <p className="text-base leading-relaxed">
-                  This is a studio and a secondhand shop.
-                </p>
-
-                <p className="text-base leading-relaxed">
-                  I hunt down pieces with good bones, clean them up, and get them back into rotation. And when you want something more personal, I stitch it.
-                </p>
-
-                <p className="text-base leading-relaxed">
-                  My goal is to bring creatives together by hosting rework parties, collabs, and making stuff side by side.
-                </p>
-
-                <p className="text-base leading-relaxed">
-                  It's time to show off what makes you special. So if you're weird, loud, shy, chaotic, rebuilding your style, or still figuring it out… welcome to the Gutter.
-                </p>
-              </div>
-
-              {/* Decorative element */}
-              <div className="pt-8 flex items-center gap-4">
-                <div className="flex-1 h-px bg-gradient-to-r from-[#ff3366] to-transparent" />
-                <span className="font-body text-3xl text-[#ff3366]">*</span>
-                <div className="flex-1 h-px bg-gradient-to-l from-[#ff3366] to-transparent" />
               </div>
             </div>
-          </div>
-        </section>
 
-        {/* The Gutter Values Section */}
-        <section className="min-h-screen flex items-center relative py-24 px-6">
-          <div className="relative z-10 max-w-6xl mx-auto bg-black/45 backdrop-blur-sm border border-white/10 p-8 sm:p-10">
-            {/* Section label */}
-            <div className="mb-12">
-              <span className="font-body text-sm font-semibold tracking-wider text-[#ff3366] uppercase">
-                VALUES
-              </span>
-              <div className="w-20 h-1 bg-[#ff3366] mt-3" />
-            </div>
+            <div className="grid gap-6 xl:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] xl:items-start">
+              <div className="flex flex-col gap-6">
+                <WindowPanel chromeLabel="welcome to my little chaos studio" tone="pink">
+                  <div className="flex flex-col gap-5">
+                    <div>
+                      <p className="section-kicker">Studio story</p>
+                      <h2 className="offset-heading mt-2 text-[1.95rem] font-semibold leading-tight text-[var(--color-ink)] sm:text-[2.25rem]">
+                        Personal, handmade, and built from good bones
+                      </h2>
+                    </div>
 
-            {/* Main title */}
-            <h1 className="font-body text-4xl sm:text-5xl md:text-6xl font-bold text-[#f0e6d3] leading-tight uppercase mb-12">
-              The Gutter Values
-            </h1>
+                    <div className="space-y-4 text-sm leading-7 text-[rgba(31,26,29,0.76)] sm:text-base">
+                      <p>
+                        I hunt down pieces with good bones, clean them up, and get them back into rotation. And when you want something more personal, I stitch it.
+                      </p>
+                      <p>
+                        My goal is to bring creatives together by hosting rework parties, collabs, and making stuff side by side instead of treating fashion like a one-way transaction.
+                      </p>
+                      <p>
+                        If you&apos;re weird, loud, shy, chaotic, rebuilding your style, or still figuring it out, welcome to the Gutter.
+                      </p>
+                    </div>
 
-            {/* Three value blocks */}
-            <div className="grid md:grid-cols-3 gap-8">
-              {/* Block 1: Come as you are */}
-              <div className="bg-black/30 border border-white/5 p-6 rounded">
-                <h3 className="font-body text-xl sm:text-2xl font-bold text-[#f0e6d3] mb-4 uppercase">
-                  NO OVERPRODUCTION 
-                </h3>
-                <p className="font-body text-sm text-[#f0e6d3]/90 leading-relaxed">
-                I don’t stockpile inventory. I drop what I find and keep it small on purpose. 
-                </p>
-                {/* Decorative element */}
-                <div className="pt-6 flex items-center gap-2">
-                  <div className="flex-1 h-px bg-gradient-to-r from-[#ff3366] to-transparent" />
-                  <span className="font-body text-xl text-[#ff3366]">*</span>
-                  <div className="flex-1 h-px bg-gradient-to-l from-[#ff3366] to-transparent" />
-                </div>
+                    <div className="flex flex-wrap gap-3 pt-1">
+                      <StickerPill tone="white" className="rotate-[-2deg]">
+                        Imperfect by Design
+                      </StickerPill>
+                    </div>
+                  </div>
+                </WindowPanel>
+
+                <WindowPanel chromeLabel="what lives here" tone="blue">
+                  <div className="grid gap-5 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-start">
+                    <div className="flex flex-col gap-4">
+                      <h2 className="offset-heading mt-2 text-[1.7rem] font-semibold leading-tight text-[var(--color-ink)]">
+                        A chaotic little secondhand shop
+                      </h2>
+
+                      <p className="text-sm leading-7 text-[rgba(31,26,29,0.74)] sm:text-base">
+                        Nothing here is meant to feel mass-made or polished flat. The point is to rescue the good stuff, make it yours, and keep the energy personal.
+                      </p>
+                    </div>
+
+                    <div className="flex flex-wrap content-start gap-3 lg:justify-end">
+                      {studioTags.map((tag, index) => (
+                        <StickerPill
+                          key={tag}
+                          tone={index % 2 === 0 ? "cream" : "white"}
+                          className={index % 2 === 0 ? "rotate-[-2deg]" : "rotate-[1.5deg]"}
+                        >
+                          {tag}
+                        </StickerPill>
+                      ))}
+                    </div>
+                  </div>
+                </WindowPanel>
               </div>
 
-              {/* Block 2: Trash to Treasure */}
-              <div className="bg-black/30 border border-white/5 p-6 rounded">
-                <h3 className="font-body text-xl sm:text-2xl font-bold text-[#f0e6d3] mb-4 uppercase">
-                REWEAR AND REUSE
-                </h3>
-                <p className="font-body text-sm text-[#f0e6d3]/90 leading-relaxed">
-                Refuse to feed the machine and buy rescued pieces, re-worn on purpose.
-                </p>
-                {/* Decorative element */}
-                <div className="pt-6 flex items-center gap-2">
-                  <div className="flex-1 h-px bg-gradient-to-r from-[#ff3366] to-transparent" />
-                  <span className="font-body text-xl text-[#ff3366]">*</span>
-                  <div className="flex-1 h-px bg-gradient-to-l from-[#ff3366] to-transparent" />
-                </div>
-              </div>
+              <WindowPanel chromeLabel="community first" tone="lilac">
+                <div className="flex flex-col gap-6">
+                  <div className="max-w-3xl">
+                    <h2 className="offset-heading mt-2 text-[1.95rem] font-semibold leading-tight text-[var(--color-ink)] sm:text-[2.25rem]">
+                      Built around rescued clothes, slower making, and community.
+                    </h2>
+                  </div>
 
-              {/* Block 3: Create Stuff */}
-              <div className="bg-black/30 border border-white/5 p-6 rounded">
-                <h3 className="font-body text-xl sm:text-2xl font-bold text-[#f0e6d3] mb-4 uppercase">
-                COMMUNITY FIRST
-                </h3>
-                <p className="font-body text-sm text-[#f0e6d3]/90 leading-relaxed">
-                No mindless consumption. Events, collabs, and creative hangouts. Shopping is just a bonus.
-
-                </p>
-                {/* Decorative element */}
-                <div className="pt-6 flex items-center gap-2">
-                  <div className="flex-1 h-px bg-gradient-to-r from-[#ff3366] to-transparent" />
-                  <span className="font-body text-xl text-[#ff3366]">*</span>
-                  <div className="flex-1 h-px bg-gradient-to-l from-[#ff3366] to-transparent" />
+                  <div className="grid gap-4">
+                    {valueCards.map((card, index) => (
+                      <article
+                        key={card.title}
+                        className={`scrap-card ${card.tone} px-5 py-6`}
+                        style={{ transform: `rotate(${index === 1 ? "1.4deg" : index === 2 ? "-1.4deg" : "-2deg"})` }}
+                      >
+                        <p className="section-kicker">{card.title}</p>
+                        <p className="mt-4 text-sm leading-7 text-[rgba(31,26,29,0.82)] sm:text-base">
+                          {card.body}
+                        </p>
+                        <div className="mt-5 dashed-divider" />
+                        <p className="annotation mt-4">{card.note}</p>
+                      </article>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              </WindowPanel>
             </div>
           </div>
         </section>
       </main>
-
-      {/* Footer */}
-      <Footer />
     </>
   );
 }

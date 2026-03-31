@@ -1,45 +1,96 @@
+import Image from "next/image";
+import SectionHeading from "./SectionHeading";
+import StickerPill from "./StickerPill";
+
 export default function ThriftSection() {
   return (
-    <section
-      id="thrift"
-      className="min-h-screen flex items-center relative py-24 px-6"
-    >
-      {/* Content */}
-      <div className="relative z-10 max-w-4xl mx-auto bg-black/45 backdrop-blur-sm border border-white/10 p-8 sm:p-10">
-        {/* Section label */}
-        <div className="mb-12">
-          <span className="font-body text-sm font-semibold tracking-wider text-[#ff3366] uppercase">
-            SECONDHAND CHAOS STUDIO
-          </span>
-          <div className="w-20 h-1 bg-[#ff3366] mt-3" />
-        </div>
+    <section id="thrift" className="page-section pt-0">
+      <div className="site-shell">
+        <div className="ripped-strip mb-8" />
 
-        {/* Main content */}
-        <div className="space-y-8">
-          <h2 className="font-body text-4xl sm:text-5xl md:text-6xl font-bold text-[#f0e6d3] leading-tight">
-            Shop the Gutter
-          </h2>
+        <div className="paper-panel px-6 py-8 sm:px-8 sm:py-10 lg:px-10">
+          <div className="grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
+            <div className="flex flex-col gap-6">
+              <SectionHeading
+                eyebrow="Secondhand chaos studio"
+                title="Shop the Gutter"
+                description="Forgotten treasures, cleaned up, rehomed, and styled with just enough fairy trash energy to make secondhand shopping feel alive."
+                note="Good bones only, rehomed on purpose, and never made to feel sterile."
+              />
 
-          <div className="text-[#f0e6d3] font-body space-y-4">
-            <p className="text-base leading-relaxed">
-              We find forgotten treasures, clean each piece, and rehome them so they get worn again.
-            </p>
-            <p className="text-base leading-relaxed">
-              Because saving the planet shouldn't feel dirty.
-            </p>
-          </div>
+              <div className="space-y-4">
+                <p className="body-copy">
+                  We find forgotten treasures, clean each piece, and get them back into the world so they can be worn again.
+                </p>
+                <p className="body-copy">
+                  Because saving the planet should not feel dirty. It should feel like finding the best thing at the thrift and wearing it until it becomes part of your lore.
+                </p>
+              </div>
 
-          {/* CTA button */}
-          <div className="pt-4">
-            <a
-              href="https://www.depop.com/gutterfairystudios/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block font-body text-sm font-semibold tracking-wide px-8 py-4 bg-[#ff3366] text-[#f0e6d3] hover:bg-[#ff3366]/80 transition-all duration-300 uppercase"
-            >
-              THRIFT
-              <span className="ml-2 text-xs">↗</span>
-            </a>
+              <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+                <a
+                  href="https://www.depop.com/gutterfairystudio/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cta-primary w-full rotate-[-1.5deg] sm:w-auto"
+                >
+                  Thrift the drop
+                  <span aria-hidden="true">-&gt;</span>
+                </a>
+                <StickerPill tone="blue" className="rotate-[3deg]">
+                  one-off thrift finds
+                </StickerPill>
+              </div>
+            </div>
+
+            <div className="relative min-h-[25rem] sm:min-h-[30rem]">
+              <div className="photo-frame absolute left-0 top-5 w-[62%] rotate-[-6deg] p-3 sm:p-4">
+                <div className="relative aspect-[4/5] overflow-hidden rounded-[18px] bg-[rgba(246,215,231,0.45)]">
+                  <Image
+                    src="/u6625829487_A_collage-inspired_group_portrait_of_stylish_wome_23986d2e-3c84-4d2e-885a-f6ac85797628_1.PNG"
+                    alt="Gutter Fairy thrift collage"
+                    fill
+                    sizes="(max-width: 1024px) 54vw, 26vw"
+                    className="object-cover"
+                  />
+                </div>
+                <p className="mt-4 section-kicker">shop the gutter</p>
+              </div>
+
+              <div className="scrap-card absolute right-0 top-0 w-[40%] rotate-[7deg] bg-[rgba(246,215,231,0.7)] px-4 py-5">
+                <p className="section-kicker">drop notes</p>
+                <p className="font-display mt-3 text-[1.45rem] leading-tight text-[var(--color-ink)]">
+                  good bones only
+                </p>
+                <p className="mt-3 text-sm leading-6 text-[rgba(31,26,29,0.82)]">
+                  Curated secondhand, rescued denim, soft washed tees, and weird little reworked pieces.
+                </p>
+              </div>
+
+              <div className="photo-frame absolute bottom-0 right-5 w-[46%] rotate-[-4deg] p-3">
+                <div className="relative aspect-square overflow-hidden rounded-[16px] bg-[rgba(207,231,245,0.5)]">
+                  <Image
+                    src="/hero.png"
+                    alt="Gutter Fairy editorial collage"
+                    fill
+                    sizes="(max-width: 1024px) 40vw, 20vw"
+                    className="object-cover"
+                  />
+                </div>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  <StickerPill tone="lime" className="rotate-[-4deg]">
+                    sustainably sourced
+                  </StickerPill>
+                </div>
+              </div>
+
+              <div className="scrap-card absolute bottom-[28%] left-[24%] w-[38%] rotate-[6deg] bg-[rgba(255,255,255,0.84)] px-4 py-4">
+                <p className="section-kicker">closet lore</p>
+                <p className="mt-3 text-sm leading-6 text-[rgba(31,26,29,0.82)]">
+                  Each piece looks like a thrift-score story, not a polished showroom sample.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

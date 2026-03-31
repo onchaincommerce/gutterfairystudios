@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import Image from "next/image";
 
 interface DesignCardProps {
@@ -6,48 +7,41 @@ interface DesignCardProps {
   description?: string;
 }
 
+function getTilt(title: string) {
+  const total = title.split("").reduce((sum, letter) => sum + letter.charCodeAt(0), 0);
+  return ((total % 7) - 3) * 0.9;
+}
+
 export default function DesignCard({ title, image, description }: DesignCardProps) {
+  const tilt = getTilt(title);
+  const cardStyle = {
+    "--card-tilt": `${tilt}deg`,
+  } as CSSProperties;
+
   return (
-    <div className="design-card overflow-hidden group">
-      {/* Image */}
-      <div className="aspect-square bg-[#f0e6d3] relative overflow-hidden">
+    <article className="design-card group" style={cardStyle}>
+      <div className="design-card__image aspect-square">
         {image ? (
-          <Image
-            src={image}
-            alt={title}
-            fill
-            className="object-cover"
-          />
+          <Image src={image} alt={title} fill className="object-cover transition-transform duration-200 group-hover:scale-[1.03]" />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center bg-[#1a1a1a]">
-            <div className="text-center">
-              <svg
-                className="w-16 h-16 mx-auto text-[#ff3366]/30"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-              >
-                <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
-              </svg>
-              <p className="text-[#f0e6d3]/40 text-xs mt-2 font-body font-semibold uppercase">
-                COMING SOON
-              </p>
+          <div className="absolute inset-0 flex items-center justify-center bg-[rgba(217,208,255,0.5)]">
+            <div className="text-center text-[var(--color-ink)]">
+              <div className="font-display text-3xl">new</div>
+              <p className="section-kicker mt-2">coming soon</p>
             </div>
           </div>
         )}
-        
-        {/* Hover overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#121212] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
       </div>
 
-      {/* Info */}
-      <div className="p-4 bg-[#121212]">
-        <h3 className="font-body text-lg font-bold text-[#f0e6d3] group-hover:text-[#ff3366] transition-colors uppercase tracking-wide">
+      <div className="px-2 pb-2 pt-4">
+        <p className="section-kicker">embroidered favorite</p>
+        <h3 className="mt-2 text-[1.45rem] font-semibold leading-tight text-[var(--color-ink)]">
           {title}
         </h3>
-        {description && (
-          <p className="text-sm text-[#f0e6d3]/60 mt-1 font-body">{description}</p>
-        )}
+        {description ? (
+          <p className="mt-2 text-sm leading-6 text-[rgba(31,26,29,0.7)]">{description}</p>
+        ) : null}
       </div>
-    </div>
+    </article>
   );
 }

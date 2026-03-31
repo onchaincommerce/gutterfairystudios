@@ -1,45 +1,87 @@
 import Link from "next/link";
+import SectionHeading from "./SectionHeading";
+import StickerPill from "./StickerPill";
+
+const valueCards = [
+  {
+    title: "Secondhand first",
+    body: "Curated thrift and upcycled pieces keep good clothes in rotation instead of feeding overproduction.",
+    tone: "bg-[rgba(255,255,255,0.82)]",
+    tilt: "-2.5deg",
+  },
+  {
+    title: "DIY forever",
+    body: "Custom embroidery, small-batch rework, and made-by-hand details keep every piece personal.",
+    tone: "bg-[rgba(246,215,231,0.58)]",
+    tilt: "2deg",
+  },
+  {
+    title: "Workshop energy",
+    body: "Patch parties, rework hangs, and creative workshops turn the shop into a little chaos studio instead of a static storefront.",
+    tone: "bg-[rgba(207,231,245,0.62)]",
+    tilt: "-1deg",
+  },
+];
 
 export default function AboutSection() {
   return (
-    <section
-      id="about"
-      className="min-h-screen flex items-center relative py-24 px-6"
-    >
-      {/* Content */}
-      <div className="relative z-10 max-w-4xl mx-auto bg-black/45 backdrop-blur-sm border border-white/10 p-8 sm:p-10">
-        {/* Section label */}
-        <div className="mb-12">
-          <span className="font-body text-sm font-semibold tracking-wider text-[#ff3366] uppercase">
-            Curated Chaos, Sustainably Sourced
-          </span>
-          <div className="w-20 h-1 bg-[#ff3366] mt-3" />
-        </div>
+    <section id="about" className="page-section">
+      <div className="site-shell">
+        <div className="paper-panel px-6 py-8 sm:px-8 sm:py-10 lg:px-10">
+          <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr] lg:items-start">
+            <div className="relative z-10">
+              <SectionHeading
+                eyebrow="Welcome to my little chaos studio"
+                title="Imperfect by Design"
+                description="Gutter Fairy exists to combat textile waste by reworking outdated styles, rescuing good pieces, and stitching personality back into getting dressed."
+                note="Personal, sustainable, handmade, and made for people rebuilding their style on their own terms."
+              />
 
-        {/* Main text - brief version */}
-        <div className="space-y-8">
-          <h2 className="font-body text-4xl sm:text-5xl md:text-6xl font-bold text-[#f0e6d3] leading-tight uppercase">
-            IMPERFECT BY DESIGN
-          </h2>
+              <div className="mt-7 space-y-4">
+                <p className="body-copy">
+                  This is a studio and a secondhand shop. I hunt down pieces with good bones, clean them up, and get them back into rotation.
+                </p>
+                <p className="body-copy">
+                  When you want something more personal, I stitch it. And when it is time to make stuff side by side, the plan is patch parties, rework hangs, and creative workshops.
+                </p>
+              </div>
 
-          <div className="text-[#f0e6d3] font-body space-y-4">
-            <p className="text-base leading-relaxed">
-              Gutter Fairy exists to combat textile waste by reworking outdated styles and embroidering the basics — bringing personality back to getting dressed.
-            </p>
-            
-            <p className="text-base leading-relaxed">
-              Welcome to my little secondhand chaos studio.
-            </p>
-          </div>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                <Link href="/about" className="cta-primary w-full sm:w-auto">
+                  Meet the fairy
+                  <span aria-hidden="true">-&gt;</span>
+                </Link>
+                <StickerPill tone="white" className="rotate-[-2deg]">
+                  Curated Chaos, Sustainably Sourced
+                </StickerPill>
+              </div>
+            </div>
 
-          {/* Learn More button */}
-          <div className="pt-4">
-            <Link
-              href="/about"
-              className="inline-block font-body text-sm font-semibold tracking-wide px-8 py-4 bg-[#ff3366] text-[#f0e6d3] hover:bg-[#ff3366]/80 transition-all duration-300 uppercase"
-            >
-              MEET THE FAIRY
-            </Link>
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
+              {valueCards.map((card, index) => (
+                <div
+                  key={card.title}
+                  className={`scrap-card ${card.tone} px-5 py-6`}
+                  style={{
+                    transform: `rotate(${card.tilt})`,
+                    marginLeft: index === 1 ? "0.75rem" : "0",
+                  }}
+                >
+                  <p className="section-kicker">{card.title}</p>
+                  <p className="mt-4 text-[1rem] leading-7 text-[rgba(31,26,29,0.84)]">
+                    {card.body}
+                  </p>
+                  <div className="mt-5 dashed-divider" />
+                  <p className="annotation mt-4">
+                    {index === 0
+                      ? "rescue the good stuff"
+                      : index === 1
+                        ? "make it weird on purpose"
+                        : "creative hang > generic commerce"}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

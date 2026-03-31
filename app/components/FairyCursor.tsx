@@ -11,16 +11,39 @@ interface Sparkle {
   color: string;
 }
 
+const sparkleColors = ["#f6d7e7", "#d9d0ff", "#c7ff4d", "#cfe7f5"];
+
 export default function FairyCursor() {
   const [position, setPosition] = useState({ x: -100, y: -100 });
   const [sparkles, setSparkles] = useState<Sparkle[]>([]);
   const [isVisible, setIsVisible] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(false);
   const sparkleIdRef = useRef(0);
   const lastSparkleTime = useRef(0);
 
-  const colors = ["#ff3366", "#f0e6d3", "#ffd1e1"];
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(pointer: fine)");
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    const updateEnabled = () => {
+      setIsEnabled(mediaQuery.matches && !reducedMotionQuery.matches);
+    };
+
+    updateEnabled();
+    mediaQuery.addEventListener("change", updateEnabled);
+    reducedMotionQuery.addEventListener("change", updateEnabled);
+
+    return () => {
+      mediaQuery.removeEventListener("change", updateEnabled);
+      reducedMotionQuery.removeEventListener("change", updateEnabled);
+    };
+  }, []);
 
   useEffect(() => {
+    if (!isEnabled) {
+      return;
+    }
+
     const handleMouseMove = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
       setIsVisible(true);
@@ -35,7 +58,7 @@ export default function FairyCursor() {
           x: e.clientX + (Math.random() - 0.5) * 20,
           y: e.clientY + (Math.random() - 0.5) * 20,
           size: Math.random() * 8 + 4,
-          color: colors[Math.floor(Math.random() * colors.length)],
+          color: sparkleColors[Math.floor(Math.random() * sparkleColors.length)],
         };
 
         setSparkles((prev) => [...prev.slice(-15), newSparkle]);
@@ -59,16 +82,24 @@ export default function FairyCursor() {
       document.removeEventListener("mouseleave", handleMouseLeave);
       document.removeEventListener("mouseenter", handleMouseEnter);
     };
-  }, []);
+  }, [isEnabled]);
 
   // Clean up old sparkles
   useEffect(() => {
+    if (!isEnabled) {
+      return;
+    }
+
     const interval = setInterval(() => {
       setSparkles((prev) => prev.slice(-10));
     }, 100);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [isEnabled]);
+
+  if (!isEnabled) {
+    return null;
+  }
 
   return (
     <>
@@ -112,7 +143,7 @@ export default function FairyCursor() {
           alt=""
           width={48}
           height={48}
-          className="drop-shadow-[0_0_8px_rgba(212,169,35,0.6)]"
+          className="drop-shadow-[0_0_8px_rgba(246,215,231,0.9)]"
           priority
           draggable={false}
         />

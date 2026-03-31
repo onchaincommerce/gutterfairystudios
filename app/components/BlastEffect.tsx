@@ -13,9 +13,32 @@ interface Blast {
 
 export default function BlastEffect() {
   const [blasts, setBlasts] = useState<Blast[]>([]);
+  const [isEnabled, setIsEnabled] = useState(false);
   const blastIdRef = useRef(0);
 
   useEffect(() => {
+    const mediaQuery = window.matchMedia("(pointer: fine)");
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    const updateEnabled = () => {
+      setIsEnabled(mediaQuery.matches && !reducedMotionQuery.matches);
+    };
+
+    updateEnabled();
+    mediaQuery.addEventListener("change", updateEnabled);
+    reducedMotionQuery.addEventListener("change", updateEnabled);
+
+    return () => {
+      mediaQuery.removeEventListener("change", updateEnabled);
+      reducedMotionQuery.removeEventListener("change", updateEnabled);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isEnabled) {
+      return;
+    }
+
     const handleClick = (e: MouseEvent) => {
       // Create multiple blast particles shooting in different directions
       const numBlasts = 3 + Math.floor(Math.random() * 3); // 3-5 blasts
@@ -44,7 +67,11 @@ export default function BlastEffect() {
     return () => {
       window.removeEventListener("mousedown", handleClick);
     };
-  }, []);
+  }, [isEnabled]);
+
+  if (!isEnabled) {
+    return null;
+  }
 
   return (
     <>
@@ -79,4 +106,3 @@ export default function BlastEffect() {
     </>
   );
 }
-
