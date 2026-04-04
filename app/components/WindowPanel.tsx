@@ -23,17 +23,17 @@ export default function WindowPanel({
   tone = "cream",
 }: WindowPanelProps) {
   return (
-    <section className={`window-panel ${className}`.trim()}>
+    <section className={`window-panel min-w-0 ${className}`.trim()}>
       <div className={`window-bar bg-gradient-to-r ${chromeTones[tone]}`}>
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-2">
           <span className="window-dot bg-[var(--color-blush)]" />
           <span className="window-dot bg-[var(--color-lilac)]" />
           <span className="window-dot bg-[var(--color-blue)]" />
         </div>
-        <p className="truncate text-[11px] font-semibold uppercase tracking-[0.22em] text-[rgba(31,26,29,0.62)]">
+        <p className="min-w-0 flex-1 truncate text-center text-[10px] font-semibold uppercase tracking-[0.14em] text-[rgba(31,26,29,0.62)] sm:text-left sm:text-[11px] sm:tracking-[0.22em]">
           {chromeLabel}
         </p>
-        <span className="hidden h-3 w-12 rounded-full border border-[rgba(31,26,29,0.12)] bg-[rgba(255,255,255,0.64)] sm:block" />
+        <span className="hidden h-3 w-12 shrink-0 rounded-full border border-[rgba(31,26,29,0.12)] bg-[rgba(255,255,255,0.64)] sm:block" />
       </div>
       <div className={`window-body ${bodyClassName}`.trim()}>{children}</div>
     </section>

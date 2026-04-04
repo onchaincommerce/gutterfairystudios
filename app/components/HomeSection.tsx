@@ -135,7 +135,7 @@ export default function HomeSection() {
           </div>
 
           <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] xl:items-start">
-            <div className="flex flex-col gap-6">
+            <div className="flex min-w-0 flex-col gap-6">
               <WindowPanel chromeLabel="Customize your clothes" tone="lilac">
                 <div className="flex flex-col gap-5">
                   <div>
@@ -191,7 +191,7 @@ export default function HomeSection() {
             </div>
 
             <WindowPanel
-              className="h-full"
+              className="h-full min-w-0"
               bodyClassName="px-4 py-5 sm:px-5 sm:py-6"
               chromeLabel="RENO MADE"
               tone="cream"

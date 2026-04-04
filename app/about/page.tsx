@@ -54,7 +54,7 @@ export default function AboutPage() {
             </div>
 
             <div className="grid gap-6 xl:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] xl:items-start">
-              <div className="flex flex-col gap-6">
+              <div className="flex min-w-0 flex-col gap-6">
                 <WindowPanel chromeLabel="welcome to my little chaos studio" tone="pink">
                   <div className="flex flex-col gap-5">
                     <div>
@@ -111,7 +111,7 @@ export default function AboutPage() {
                 </WindowPanel>
               </div>
 
-              <WindowPanel chromeLabel="community first" tone="lilac">
+              <WindowPanel className="min-w-0" chromeLabel="community first" tone="lilac">
                 <div className="flex flex-col gap-6">
                   <div className="max-w-3xl">
                     <h2 className="offset-heading mt-2 text-[1.95rem] font-semibold leading-tight text-[var(--color-ink)] sm:text-[2.25rem]">
