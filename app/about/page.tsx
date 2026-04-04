@@ -24,7 +24,7 @@ export default function AboutPage() {
             </div>
 
             <div className="welcome-copy">
-              <h1 className="page-title">Welcome to the Gutter</h1>
+              <h1 className="page-title">Reclaim your Magic</h1>
               <p className="page-copy">
                 Gutter Fairy started with thrifted clothes and the need to make something out of
                 what most people overlook.

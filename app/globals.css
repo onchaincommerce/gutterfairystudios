@@ -717,6 +717,16 @@ img {
   line-height: 1.5;
 }
 
+.catalog-price {
+  margin-top: 0.75rem;
+  font-family: var(--font-display);
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #48639d;
+}
+
 .addition-actions,
 .catalog-actions {
   display: flex;

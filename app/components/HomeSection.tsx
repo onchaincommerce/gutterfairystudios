@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import OrderPatchButton from "./OrderPatchButton";
 import WindowPanel from "./WindowPanel";
 import { homeNews, newestAdditions } from "../data/siteContent";
+
+const PLACEHOLDER_PRICE = "$ coming soon";
 
 export default function HomeSection() {
   return (
@@ -47,15 +48,9 @@ export default function HomeSection() {
                       className="object-contain p-3"
                     />
                   </div>
-                  <p className="addition-meta">{item.meta}</p>
                   <h2 className="addition-title">{item.title}</h2>
                   <p className="addition-description">{item.description}</p>
-                  <div className="addition-actions">
-                    <OrderPatchButton
-                      buttonLabel="Order patch"
-                      initialPatchTitle={item.patchTitle}
-                    />
-                  </div>
+                  <p className="catalog-price">{PLACEHOLDER_PRICE}</p>
                 </article>
               ))}
             </div>
