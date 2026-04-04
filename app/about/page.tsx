@@ -1,146 +1,97 @@
+import Image from "next/image";
 import Navigation from "../components/Navigation";
-import FairyCursor from "../components/FairyCursor";
-import StickerPill from "../components/StickerPill";
 import WindowPanel from "../components/WindowPanel";
-
-const valueCards = [
-  {
-    title: "No overproduction",
-    body: "I do not stockpile inventory. I drop what I find and keep it small on purpose.",
-    note: "less waste, better weird stuff",
-    tone: "bg-[rgba(255,255,255,0.84)]",
-  },
-  {
-    title: "Rewear and reuse",
-    body: "Refuse to feed the machine and buy rescued pieces, re-worn on purpose.",
-    note: "good clothes deserve another life",
-    tone: "bg-[rgba(246,215,231,0.62)]",
-  },
-  {
-    title: "Community first",
-    body: "Events, collabs, and creative hangouts matter more than mindless consumption.",
-    note: "shopping is only part of the story",
-    tone: "bg-[rgba(207,231,245,0.66)]",
-  },
-];
-
-const studioTags = [
-  "Curated secondhand",
-  "Upcycled goods",
-  "Custom patches",
-  "Local workshops",
-];
+import { aboutHighlights, depopLink, shopSteps } from "../data/siteContent";
 
 export default function AboutPage() {
   return (
     <>
-      <FairyCursor />
       <Navigation />
 
-      <main className="pb-20 pt-6 sm:pt-8">
-        <section className="site-shell">
-          <div className="flex flex-col gap-6">
-            <div className="px-5 py-3 sm:px-8 lg:px-12 xl:px-16">
-              <div className="flex flex-col items-center gap-6 text-center sm:gap-7">
-                <div className="flex max-w-4xl flex-col items-center gap-5">
-                  <h1 className="offset-heading text-[clamp(2.9rem,8vw,5.7rem)] font-semibold leading-[0.92] text-[var(--color-ink)]">
-                    Reclaim Your Magic
-                  </h1>
-                  <p className="max-w-3xl text-base leading-8 text-[rgba(31,26,29,0.74)] sm:text-[1.02rem]">
-                    Gutter Fairy is a studio and a secondhand shop built around rescued clothes, custom stitching, and community events that make getting dressed feel personal again.
-                  </p>
-                </div>
+      <main className="site-shell space-y-4">
+        <WindowPanel chromeLabel="Reno Made" tone="lilac">
+          <div className="welcome-layout">
+            <div className="fairy-stage" aria-hidden="true">
+              <div className="fairy-stage__sprite">
+                <Image
+                  src="/fairy.png"
+                  alt="Gutter Fairy logo"
+                  fill
+                  sizes="(max-width: 767px) 92vw, (max-width: 1080px) 42vw, 28vw"
+                  className="fairy-stage__image object-contain"
+                />
               </div>
             </div>
 
-            <div className="grid gap-6 xl:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] xl:items-start">
-              <div className="flex min-w-0 flex-col gap-6">
-                <WindowPanel chromeLabel="welcome to my little chaos studio" tone="pink">
-                  <div className="flex flex-col gap-5">
-                    <div>
-                      <p className="section-kicker">Studio story</p>
-                      <h2 className="offset-heading mt-2 text-[1.95rem] font-semibold leading-tight text-[var(--color-ink)] sm:text-[2.25rem]">
-                        Personal, handmade, and built from good bones
-                      </h2>
-                    </div>
-
-                    <div className="space-y-4 text-sm leading-7 text-[rgba(31,26,29,0.76)] sm:text-base">
-                      <p>
-                        I hunt down pieces with good bones, clean them up, and get them back into rotation. And when you want something more personal, I stitch it.
-                      </p>
-                      <p>
-                        My goal is to bring creatives together by hosting rework parties, collabs, and making stuff side by side instead of treating fashion like a one-way transaction.
-                      </p>
-                      <p>
-                        If you&apos;re weird, loud, shy, chaotic, rebuilding your style, or still figuring it out, welcome to the Gutter.
-                      </p>
-                    </div>
-
-                    <div className="flex flex-wrap gap-3 pt-1">
-                      <StickerPill tone="white" className="rotate-[-2deg]">
-                        Imperfect by Design
-                      </StickerPill>
-                    </div>
-                  </div>
-                </WindowPanel>
-
-                <WindowPanel chromeLabel="what lives here" tone="blue">
-                  <div className="grid gap-5 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:items-start">
-                    <div className="flex flex-col gap-4">
-                      <h2 className="offset-heading mt-2 text-[1.7rem] font-semibold leading-tight text-[var(--color-ink)]">
-                        A chaotic little secondhand shop
-                      </h2>
-
-                      <p className="text-sm leading-7 text-[rgba(31,26,29,0.74)] sm:text-base">
-                        Nothing here is meant to feel mass-made or polished flat. The point is to rescue the good stuff, make it yours, and keep the energy personal.
-                      </p>
-                    </div>
-
-                    <div className="flex flex-wrap content-start gap-3 lg:justify-end">
-                      {studioTags.map((tag, index) => (
-                        <StickerPill
-                          key={tag}
-                          tone={index % 2 === 0 ? "cream" : "white"}
-                          className={index % 2 === 0 ? "rotate-[-2deg]" : "rotate-[1.5deg]"}
-                        >
-                          {tag}
-                        </StickerPill>
-                      ))}
-                    </div>
-                  </div>
-                </WindowPanel>
-              </div>
-
-              <WindowPanel className="min-w-0" chromeLabel="community first" tone="lilac">
-                <div className="flex flex-col gap-6">
-                  <div className="max-w-3xl">
-                    <h2 className="offset-heading mt-2 text-[1.95rem] font-semibold leading-tight text-[var(--color-ink)] sm:text-[2.25rem]">
-                      Built around rescued clothes, slower making, and community.
-                    </h2>
-                  </div>
-
-                  <div className="grid gap-4">
-                    {valueCards.map((card, index) => (
-                      <article
-                        key={card.title}
-                        className={`scrap-card ${card.tone} px-5 py-6`}
-                        style={{ transform: `rotate(${index === 1 ? "1.4deg" : index === 2 ? "-1.4deg" : "-2deg"})` }}
-                      >
-                        <p className="section-kicker">{card.title}</p>
-                        <p className="mt-4 text-sm leading-7 text-[rgba(31,26,29,0.82)] sm:text-base">
-                          {card.body}
-                        </p>
-                        <div className="mt-5 dashed-divider" />
-                        <p className="annotation mt-4">{card.note}</p>
-                      </article>
-                    ))}
-                  </div>
-                </div>
-              </WindowPanel>
+            <div className="welcome-copy">
+              <h1 className="page-title">Welcome to the Gutter</h1>
+              <p className="page-copy">
+                Gutter Fairy started with thrifted clothes and the need to make something out of
+                what most people overlook.
+              </p>
+              <p className="page-copy">
+                We host workshops where people show up with their own clothes, sit side by side,
+                and learn how to rework them into something that actually feels like theirs.
+              </p>
+              <p className="page-copy">
+                We keep this going through patches and secondhand pieces, reworked by hand and
+                put back into rotation so they can keep being worn, not wasted.
+              </p>
             </div>
           </div>
-        </section>
+        </WindowPanel>
+
+        <div className="desktop-grid items-start gap-4 lg:grid-cols-2">
+          <WindowPanel chromeLabel="A lil chaotic shop" tone="pink">
+            <div className="classic-list">
+              {aboutHighlights.map((item) => (
+                <article key={item.title} className="classic-list__item">
+                  <h2 className="classic-list__title">{item.title}</h2>
+                  <p className="classic-list__body">{item.body}</p>
+                  <p className="classic-list__note">{item.note}</p>
+                </article>
+              ))}
+            </div>
+          </WindowPanel>
+
+          <WindowPanel chromeLabel="The process" tone="blue">
+            <div className="process-chat">
+              <div className="process-chat__header">
+                <span className="process-chat__room"># workroom</span>
+                <span className="process-chat__count">{shopSteps.length} steps live</span>
+              </div>
+
+              <div className="process-chat__messages">
+                {shopSteps.map((step, index) => (
+                  <article key={step.title} className="process-chat__message">
+                    <div className="process-chat__avatar" aria-hidden="true">
+                      {index + 1}
+                    </div>
+                    <div className="process-chat__bubble">
+                      <p className="process-chat__meta">gutterfairy_system</p>
+                      <h2 className="process-chat__title">{step.title}</h2>
+                      <p className="classic-list__body">{step.body}</p>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            <div className="news-footer">
+              <span>Reworked pieces land on Depop when they are ready.</span>
+              <a
+                href={depopLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="win-button utility-button-inline"
+              >
+                Shop
+              </a>
+            </div>
+          </WindowPanel>
+        </div>
       </main>
+
     </>
   );
 }

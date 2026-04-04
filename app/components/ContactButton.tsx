@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import WindowDots from "./WindowDots";
+import { instagramLink } from "../data/siteContent";
 
 type ContactButtonProps = {
   label?: string;
@@ -12,6 +14,14 @@ export default function ContactButton({
   className = "",
 }: ContactButtonProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(false);
+
+  const closeWindow = () => {
+    setIsExpanded(false);
+    setIsMinimized(false);
+    setIsOpen(false);
+  };
 
   useEffect(() => {
     if (!isOpen) {
@@ -20,7 +30,7 @@ export default function ContactButton({
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        setIsOpen(false);
+        closeWindow();
       }
     };
 
@@ -30,74 +40,73 @@ export default function ContactButton({
 
   return (
     <>
-      <button
-        type="button"
-        onClick={() => setIsOpen(true)}
-        className={className}
-      >
+      <button type="button" onClick={() => setIsOpen(true)} className={className}>
         {label}
       </button>
 
       {isOpen ? (
-        <div className="fixed inset-0 z-[10001]">
-          <div
-            className="fixed inset-0 bg-[rgba(31,26,29,0.38)] backdrop-blur-sm"
-            onClick={() => setIsOpen(false)}
+        <div className="fixed inset-0 z-[70]">
+          <button
+            type="button"
+            className="window-panel__backdrop"
+            aria-label="Close contact window"
+            onClick={closeWindow}
           />
-          <div className="fixed inset-0 z-[10002] flex items-center justify-center p-4 sm:p-6">
-            <div
-              className="window-panel relative w-full max-w-md"
+          <div className="fixed inset-0 z-[71] flex items-center justify-center p-4">
+            <section
+              className={`window-panel ${isMinimized ? "window-panel--minimized" : ""} ${isExpanded ? "window-panel--zoomed" : "max-w-xl"} w-full`.trim()}
               role="dialog"
               aria-modal="true"
-              onClick={(event) => event.stopPropagation()}
             >
-              <div className="window-bar bg-gradient-to-r from-[rgba(246,215,231,0.95)] to-[rgba(255,255,255,0.9)]">
-                <div className="flex items-center gap-2">
-                  <span className="window-dot bg-[var(--color-blush)]" />
-                  <span className="window-dot bg-[var(--color-lilac)]" />
-                  <span className="window-dot bg-[var(--color-blue)]" />
-                </div>
-                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-[rgba(31,26,29,0.62)]">
-                  contact.exe
-                </p>
-                <button
-                  type="button"
-                  onClick={() => setIsOpen(false)}
-                  className="flex h-7 w-7 items-center justify-center rounded-full border border-[rgba(31,26,29,0.16)] bg-[rgba(255,255,255,0.78)] text-sm text-[var(--color-ink)]"
-                  aria-label="Close"
-                >
-                  x
+              <div className="window-bar window-bar--blue">
+                <WindowDots
+                  isMinimized={isMinimized}
+                  isZoomed={isExpanded}
+                  onToggleMinimize={() => {
+                    setIsMinimized((current) => {
+                      const nextState = !current;
+                      if (nextState) {
+                        setIsExpanded(false);
+                      }
+                      return nextState;
+                    });
+                  }}
+                  onToggleZoom={() => {
+                    setIsMinimized(false);
+                    setIsExpanded((current) => !current);
+                  }}
+                  zoomLabel="contact window"
+                />
+                <p className="window-label">Contact Gutter Fairy</p>
+                <button type="button" onClick={closeWindow} className="win-button utility-button-inline">
+                  Close
                 </button>
               </div>
 
-              <div className="window-body">
-                <p className="section-kicker">Contact Gutter Fairy</p>
-                <h2 className="offset-heading mt-3 text-[1.8rem] font-semibold leading-tight text-[var(--color-ink)]">
-                  DM for custom work, workshop questions, or weird little ideas.
-                </h2>
-                <p className="mt-4 text-sm leading-7 text-[rgba(31,26,29,0.76)]">
-                  Instagram is the cleanest contact point right now, so this button opens the direct brand channel instead of sending you into a fake contact form.
-                </p>
+              {!isMinimized ? (
+                <div className="window-body">
+                  <p className="eyebrow">Studio contact</p>
+                  <h2 className="section-title mt-2">DM for custom work, workshop questions, or weird little ideas.</h2>
+                  <p className="page-copy mt-3">
+                    Instagram is the cleanest contact point right now, so this opens the direct brand channel instead of a fake contact form.
+                  </p>
 
-                <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                  <a
-                    href="https://www.instagram.com/gutterfairystudios/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="glossy-button w-full justify-center"
-                  >
-                    Open Instagram
-                  </a>
-                  <button
-                    type="button"
-                    onClick={() => setIsOpen(false)}
-                    className="utility-button w-full justify-center"
-                  >
-                    Close
-                  </button>
+                  <div className="button-row mt-4">
+                    <a
+                      href={instagramLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="win-button"
+                    >
+                      Open Instagram
+                    </a>
+                    <button type="button" onClick={closeWindow} className="win-button">
+                      Dismiss
+                    </button>
+                  </div>
                 </div>
-              </div>
-            </div>
+              ) : null}
+            </section>
           </div>
         </div>
       ) : null}

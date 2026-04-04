@@ -1,10 +1,13 @@
-import type { ReactNode } from "react";
+"use client";
+
+import { useEffect, useState, type ReactNode } from "react";
+import WindowDots from "./WindowDots";
 
 const chromeTones = {
-  pink: "from-[rgba(246,215,231,0.95)] to-[rgba(255,255,255,0.88)]",
-  lilac: "from-[rgba(217,208,255,0.95)] to-[rgba(255,255,255,0.9)]",
-  blue: "from-[rgba(207,231,245,0.95)] to-[rgba(255,255,255,0.9)]",
-  cream: "from-[rgba(255,249,244,0.96)] to-[rgba(255,255,255,0.9)]",
+  pink: "window-bar window-bar--pink",
+  lilac: "window-bar window-bar--lilac",
+  blue: "window-bar window-bar--blue",
+  cream: "window-bar window-bar--cream",
 };
 
 type WindowPanelProps = {
@@ -22,20 +25,73 @@ export default function WindowPanel({
   chromeLabel,
   tone = "cream",
 }: WindowPanelProps) {
+  const [isMinimized, setIsMinimized] = useState(false);
+  const [isZoomed, setIsZoomed] = useState(false);
+
+  useEffect(() => {
+    if (!isZoomed) {
+      return;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsZoomed(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isZoomed]);
+
   return (
-    <section className={`window-panel min-w-0 ${className}`.trim()}>
-      <div className={`window-bar bg-gradient-to-r ${chromeTones[tone]}`}>
-        <div className="flex shrink-0 items-center gap-2">
-          <span className="window-dot bg-[var(--color-blush)]" />
-          <span className="window-dot bg-[var(--color-lilac)]" />
-          <span className="window-dot bg-[var(--color-blue)]" />
+    <>
+      {isZoomed ? (
+        <button
+          type="button"
+          className="window-panel__backdrop"
+          onClick={() => setIsZoomed(false)}
+          aria-label={`Restore ${chromeLabel}`}
+        />
+      ) : null}
+
+      <section
+        className={`window-panel min-w-0 ${isMinimized ? "window-panel--minimized" : ""} ${isZoomed ? "window-panel--zoomed" : ""} ${className}`.trim()}
+      >
+        <div className={chromeTones[tone]}>
+          <WindowDots
+            isMinimized={isMinimized}
+            isZoomed={isZoomed}
+            onToggleMinimize={() => {
+              setIsMinimized((current) => {
+                const nextState = !current;
+                if (nextState) {
+                  setIsZoomed(false);
+                }
+                return nextState;
+              });
+            }}
+            onToggleZoom={() => {
+              setIsMinimized(false);
+              setIsZoomed((current) => !current);
+            }}
+            zoomLabel={chromeLabel}
+          />
+          <p className="window-label">
+            {chromeLabel}
+          </p>
+          <span className="window-bar__status" aria-hidden="true" />
         </div>
-        <p className="min-w-0 flex-1 truncate text-center text-[10px] font-semibold uppercase tracking-[0.14em] text-[rgba(31,26,29,0.62)] sm:text-left sm:text-[11px] sm:tracking-[0.22em]">
-          {chromeLabel}
-        </p>
-        <span className="hidden h-3 w-12 shrink-0 rounded-full border border-[rgba(31,26,29,0.12)] bg-[rgba(255,255,255,0.64)] sm:block" />
-      </div>
-      <div className={`window-body ${bodyClassName}`.trim()}>{children}</div>
-    </section>
+        {!isMinimized ? (
+          <div className={`window-body ${bodyClassName}`.trim()}>{children}</div>
+        ) : null}
+      </section>
+    </>
   );
 }

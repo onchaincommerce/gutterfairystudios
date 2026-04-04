@@ -1,5 +1,5 @@
 "use client";
 
 export default function ScrollBackground() {
-  return null;
+  return <div aria-hidden="true" className="desktop-wallpaper" />;
 }
