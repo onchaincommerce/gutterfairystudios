@@ -89,13 +89,18 @@ export default function OrderPatchButton({
     <>
       <div className={wrapperClassName}>
         {children ? (
-          <button type="button" onClick={openModal} className={triggerClassName}>
+          <button type="button" onClick={openModal} className={triggerClassName} data-ui-sound="open">
             {children}
           </button>
         ) : null}
 
         {buttonLabel ? (
-          <button type="button" onClick={openModal} className={`win-button ${className}`.trim()}>
+          <button
+            type="button"
+            onClick={openModal}
+            className={`win-button ${className}`.trim()}
+            data-ui-sound="open"
+          >
             {buttonLabel}
           </button>
         ) : null}
@@ -142,17 +147,14 @@ export default function OrderPatchButton({
               {!isMinimized ? (
                 <div className="window-body">
                   {status === "success" ? (
-                    <>
-                      <h2 className="section-title">Order complete</h2>
-                      <div className="classic-list mt-5">
-                        <div className="classic-list__item">
-                          <p className="classic-list__title">Request received</p>
-                          <p className="classic-list__body">
-                            Your patch request is in the inbox. I&apos;ll reach out soon for delivery information.
-                          </p>
-                        </div>
+                    <div className="classic-list">
+                      <div className="classic-list__item">
+                        <p className="classic-list__title">Request received</p>
+                        <p className="classic-list__body">
+                          Your patch request is in the inbox. I&apos;ll reach out soon for delivery information.
+                        </p>
                       </div>
-                    </>
+                    </div>
                   ) : (
                     <>
                       <p className="eyebrow">Custom patch request</p>

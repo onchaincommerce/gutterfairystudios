@@ -40,7 +40,7 @@ export default function ContactButton({
 
   return (
     <>
-      <button type="button" onClick={() => setIsOpen(true)} className={className}>
+      <button type="button" onClick={() => setIsOpen(true)} className={className} data-ui-sound="open">
         {label}
       </button>
 

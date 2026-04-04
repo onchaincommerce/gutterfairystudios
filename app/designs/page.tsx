@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Navigation from "../components/Navigation";
+import OrderPatchButton from "../components/OrderPatchButton";
 import WindowPanel from "../components/WindowPanel";
 import { designCatalog } from "../data/siteContent";
 
@@ -79,6 +80,12 @@ export default async function DesignsPage({ searchParams }: DesignsPageProps) {
                   Built for custom ordering, thread changes, and sizing adjustments.
                 </p>
                 <p className="catalog-price">{PLACEHOLDER_PRICE}</p>
+                <div className="catalog-actions">
+                  <OrderPatchButton
+                    initialPatchTitle={design.title}
+                    buttonLabel="Order patch"
+                  />
+                </div>
               </article>
             ))}
           </div>

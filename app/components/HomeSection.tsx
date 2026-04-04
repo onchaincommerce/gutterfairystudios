@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import OrderPatchButton from "./OrderPatchButton";
 import WindowPanel from "./WindowPanel";
 import { homeNews, newestAdditions } from "../data/siteContent";
 
@@ -51,6 +52,12 @@ export default function HomeSection() {
                   <h2 className="addition-title">{item.title}</h2>
                   <p className="addition-description">{item.description}</p>
                   <p className="catalog-price">{PLACEHOLDER_PRICE}</p>
+                  <div className="addition-actions">
+                    <OrderPatchButton
+                      buttonLabel="Order patch"
+                      initialPatchTitle={item.patchTitle}
+                    />
+                  </div>
                 </article>
               ))}
             </div>
@@ -65,10 +72,10 @@ export default function HomeSection() {
         </div>
 
         <aside className="sidebar-column">
-          <WindowPanel chromeLabel="Latest News" tone="pink">
+          <WindowPanel chromeLabel="Studio Events" tone="pink">
             <div className="event-files">
-              {homeNews.map((item) => (
-                <details key={item.id} className="event-file">
+              {homeNews.map((item, index) => (
+                <details key={item.id} className="event-file" open={index === 0}>
                   <summary className="event-file__summary">
                     <span className="event-file__tab" aria-hidden="true" />
                     <div className="event-file__headline">

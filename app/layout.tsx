@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import RetroMusicPlayer from "./components/RetroMusicPlayer";
 import ScrollBackground from "./components/ScrollBackground";
+import UISoundEffects from "./components/UISoundEffects";
 
 export const metadata: Metadata = {
   title: "Gutter Fairy",
@@ -21,9 +23,11 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased relative">
         <ScrollBackground />
+        <UISoundEffects />
         <div className="desktop-page">
           {children}
         </div>
+        <RetroMusicPlayer />
       </body>
     </html>
   );

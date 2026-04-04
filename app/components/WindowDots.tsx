@@ -27,6 +27,7 @@ export default function WindowDots({
           onClick={onClose}
           className="window-dot window-dot--red window-dot--button"
           aria-label={`Close ${closeLabel}`}
+          data-ui-sound="close"
         >
           <span className="window-dot__mark" aria-hidden="true">
             ×
@@ -43,6 +44,7 @@ export default function WindowDots({
           className="window-dot window-dot--yellow window-dot--button"
           aria-label={isMinimized ? `Restore ${zoomLabel}` : `Minimize ${zoomLabel}`}
           aria-pressed={isMinimized}
+          data-ui-sound={isMinimized ? "expand" : "minimize"}
         >
           <span className="window-dot__mark" aria-hidden="true">
             −
@@ -63,6 +65,7 @@ export default function WindowDots({
           className="window-dot window-dot--green window-dot--button"
           aria-label={isZoomed ? `Minimize ${zoomLabel}` : `Maximize ${zoomLabel}`}
           aria-pressed={isZoomed}
+          data-ui-sound={isZoomed ? "minimize" : "expand"}
         >
           <span className="window-dot__mark" aria-hidden="true">
             {isZoomed ? "-" : "+"}
