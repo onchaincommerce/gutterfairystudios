@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import RetroMusicPlayer from "./components/RetroMusicPlayer";
 import ScrollBackground from "./components/ScrollBackground";
@@ -28,6 +29,7 @@ export default function RootLayout({
           {children}
         </div>
         <RetroMusicPlayer />
+        <Analytics />
       </body>
     </html>
   );
