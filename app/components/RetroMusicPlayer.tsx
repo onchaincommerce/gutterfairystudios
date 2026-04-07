@@ -1,9 +1,40 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { buildRetroTrackLibrary, type RetroTrackAsset } from "../lib/retroPlayerTracks";
+import { useEffect, useEffectEvent, useRef, useState } from "react";
 
 const INITIAL_VOLUME = 0.68;
+const TRACKS = [
+  {
+    id: "night-switch",
+    title: "Night Switch",
+    subtitle: "Angular indie-rock energy",
+    src: "/diverse_five_song_set_v1/01_night_switch.wav",
+  },
+  {
+    id: "city-static",
+    title: "City Static",
+    subtitle: "Punchy jangle and fast motion",
+    src: "/diverse_five_song_set_v1/02_city_static.wav",
+  },
+  {
+    id: "neon-ritual",
+    title: "Neon Ritual",
+    subtitle: "Colorful art-pop groove",
+    src: "/diverse_five_song_set_v1/03_neon_ritual.wav",
+  },
+  {
+    id: "satellite-romance",
+    title: "Satellite Romance",
+    subtitle: "Retro-futurist synth-pop hook",
+    src: "/diverse_five_song_set_v1/04_satellite_romance.wav",
+  },
+  {
+    id: "afterglow-complex",
+    title: "Afterglow Complex",
+    subtitle: "Dreamy club euphoria",
+    src: "/diverse_five_song_set_v1/05_afterglow_complex.wav",
+  },
+] as const;
 
 function formatTime(totalSeconds: number) {
   if (!Number.isFinite(totalSeconds) || totalSeconds <= 0) {
@@ -18,28 +49,73 @@ function formatTime(totalSeconds: number) {
 
 export default function RetroMusicPlayer() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [tracks, setTracks] = useState<RetroTrackAsset[]>([]);
   const [trackIndex, setTrackIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMinimized, setIsMinimized] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(INITIAL_VOLUME);
-
-  useEffect(() => {
-    let builtTracks: RetroTrackAsset[] = [];
-    const frame = window.requestAnimationFrame(() => {
-      builtTracks = buildRetroTrackLibrary();
-      setTracks(builtTracks);
-    });
-
-    return () => {
-      window.cancelAnimationFrame(frame);
-      builtTracks.forEach((track) => URL.revokeObjectURL(track.url));
-    };
-  }, []);
-
+  const tracks = TRACKS;
   const currentTrack = tracks[trackIndex];
-  const duration = currentTrack?.duration ?? 0;
+
+  const handleTrackStep = (direction: -1 | 1) => {
+    if (!tracks.length) {
+      return;
+    }
+
+    setCurrentTime(0);
+    setTrackIndex((currentIndex) => {
+      const nextIndex = currentIndex + direction;
+
+      if (nextIndex < 0) {
+        return tracks.length - 1;
+      }
+
+      if (nextIndex >= tracks.length) {
+        return 0;
+      }
+
+      return nextIndex;
+    });
+  };
+
+  const handleSeek = (value: number) => {
+    const audio = audioRef.current;
+
+    if (!audio) {
+      return;
+    }
+
+    const nextTime = Math.min(Math.max(value, 0), duration || 0);
+
+    audio.currentTime = nextTime;
+    setCurrentTime(nextTime);
+  };
+
+  const handleStop = () => {
+    const audio = audioRef.current;
+
+    if (!audio) {
+      return;
+    }
+
+    audio.pause();
+    audio.currentTime = 0;
+    setCurrentTime(0);
+    setIsPlaying(false);
+  };
+
+  const handleMediaTrackStep = useEffectEvent((direction: -1 | 1) => {
+    handleTrackStep(direction);
+  });
+
+  const handleMediaSeek = useEffectEvent((value: number) => {
+    handleSeek(value);
+  });
+
+  const handleMediaStop = useEffectEvent(() => {
+    handleStop();
+  });
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -48,7 +124,7 @@ export default function RetroMusicPlayer() {
       return;
     }
 
-    audio.src = currentTrack.url;
+    audio.src = currentTrack.src;
     audio.load();
     audio.currentTime = 0;
   }, [currentTrack]);
@@ -91,6 +167,15 @@ export default function RetroMusicPlayer() {
       setCurrentTime(audio.currentTime);
     };
 
+    const handleLoadedMetadata = () => {
+      setDuration(Number.isFinite(audio.duration) ? audio.duration : 0);
+    };
+
+    const handleLoadStart = () => {
+      setCurrentTime(0);
+      setDuration(0);
+    };
+
     const handlePause = () => {
       if (audio.ended) {
         return;
@@ -115,18 +200,111 @@ export default function RetroMusicPlayer() {
       setTrackIndex((currentIndex) => (currentIndex + 1) % tracks.length);
     };
 
+    audio.addEventListener("loadedmetadata", handleLoadedMetadata);
+    audio.addEventListener("loadstart", handleLoadStart);
     audio.addEventListener("timeupdate", handleTimeUpdate);
     audio.addEventListener("pause", handlePause);
     audio.addEventListener("play", handlePlay);
     audio.addEventListener("ended", handleEnded);
 
     return () => {
+      audio.removeEventListener("loadedmetadata", handleLoadedMetadata);
+      audio.removeEventListener("loadstart", handleLoadStart);
       audio.removeEventListener("timeupdate", handleTimeUpdate);
       audio.removeEventListener("pause", handlePause);
       audio.removeEventListener("play", handlePlay);
       audio.removeEventListener("ended", handleEnded);
     };
   }, [tracks.length]);
+
+  useEffect(() => {
+    if (typeof navigator === "undefined" || !("mediaSession" in navigator) || !currentTrack) {
+      return;
+    }
+
+    const mediaSession = navigator.mediaSession;
+
+    mediaSession.metadata = new MediaMetadata({
+      title: currentTrack.title,
+      artist: "Gutter Fairy",
+      album: "Studio Playlist",
+      artwork: [
+        {
+          src: "/apple-touch-fairy.png",
+          sizes: "512x512",
+          type: "image/png",
+        },
+      ],
+    });
+    mediaSession.playbackState = isPlaying ? "playing" : "paused";
+
+    mediaSession.setActionHandler("play", () => {
+      const audio = audioRef.current;
+
+      if (!audio) {
+        return;
+      }
+
+      void audio.play().catch(() => {
+        setIsPlaying(false);
+      });
+    });
+
+    mediaSession.setActionHandler("pause", () => {
+      audioRef.current?.pause();
+    });
+
+    mediaSession.setActionHandler("stop", () => {
+      handleMediaStop();
+    });
+
+    mediaSession.setActionHandler("previoustrack", () => {
+      handleMediaTrackStep(-1);
+    });
+
+    mediaSession.setActionHandler("nexttrack", () => {
+      handleMediaTrackStep(1);
+    });
+
+    mediaSession.setActionHandler("seekbackward", (details) => {
+      handleMediaSeek(currentTime - (details.seekOffset ?? 10));
+    });
+
+    mediaSession.setActionHandler("seekforward", (details) => {
+      handleMediaSeek(currentTime + (details.seekOffset ?? 10));
+    });
+
+    mediaSession.setActionHandler("seekto", (details) => {
+      if (typeof details.seekTime !== "number") {
+        return;
+      }
+
+      handleMediaSeek(details.seekTime);
+    });
+
+    if ("setPositionState" in mediaSession && duration > 0) {
+      try {
+        mediaSession.setPositionState({
+          duration,
+          playbackRate: 1,
+          position: Math.min(currentTime, duration),
+        });
+      } catch {
+        // Ignore unsupported position updates.
+      }
+    }
+
+    return () => {
+      mediaSession.setActionHandler("play", null);
+      mediaSession.setActionHandler("pause", null);
+      mediaSession.setActionHandler("stop", null);
+      mediaSession.setActionHandler("previoustrack", null);
+      mediaSession.setActionHandler("nexttrack", null);
+      mediaSession.setActionHandler("seekbackward", null);
+      mediaSession.setActionHandler("seekforward", null);
+      mediaSession.setActionHandler("seekto", null);
+    };
+  }, [currentTrack, currentTime, duration, isPlaying, tracks.length]);
 
   const handlePlayPause = async () => {
     const audio = audioRef.current;
@@ -145,51 +323,6 @@ export default function RetroMusicPlayer() {
     }
 
     audio.pause();
-  };
-
-  const handleStop = () => {
-    const audio = audioRef.current;
-
-    if (!audio) {
-      return;
-    }
-
-    audio.pause();
-    audio.currentTime = 0;
-    setCurrentTime(0);
-    setIsPlaying(false);
-  };
-
-  const handleTrackStep = (direction: -1 | 1) => {
-    if (!tracks.length) {
-      return;
-    }
-
-    setCurrentTime(0);
-    setTrackIndex((currentIndex) => {
-      const nextIndex = currentIndex + direction;
-
-      if (nextIndex < 0) {
-        return tracks.length - 1;
-      }
-
-      if (nextIndex >= tracks.length) {
-        return 0;
-      }
-
-      return nextIndex;
-    });
-  };
-
-  const handleSeek = (value: number) => {
-    const audio = audioRef.current;
-
-    if (!audio) {
-      return;
-    }
-
-    audio.currentTime = value;
-    setCurrentTime(value);
   };
 
   const progress = duration > 0 ? (currentTime / duration) * 100 : 0;
@@ -266,7 +399,7 @@ export default function RetroMusicPlayer() {
                   className="retro-player__button"
                   onClick={() => handleTrackStep(-1)}
                   aria-label="Previous track"
-                  disabled={!currentTrack}
+                  disabled={tracks.length <= 1}
                 >
                   {"<<"}
                 </button>
@@ -293,7 +426,7 @@ export default function RetroMusicPlayer() {
                   className="retro-player__button"
                   onClick={() => handleTrackStep(1)}
                   aria-label="Next track"
-                  disabled={!currentTrack}
+                  disabled={tracks.length <= 1}
                 >
                   {">>"}
                 </button>
@@ -341,7 +474,7 @@ export default function RetroMusicPlayer() {
           </>
         )}
 
-        <audio ref={audioRef} preload="auto" />
+        <audio ref={audioRef} preload="metadata" />
       </div>
     </div>
   );
