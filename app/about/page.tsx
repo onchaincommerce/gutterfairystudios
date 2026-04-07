@@ -1,4 +1,5 @@
 import Image from "next/image";
+import AboutMissionPopup from "../components/AboutMissionPopup";
 import Navigation from "../components/Navigation";
 import WindowPanel from "../components/WindowPanel";
 import { aboutHighlights, depopLink, shopSteps } from "../data/siteContent";
@@ -7,6 +8,7 @@ export default function AboutPage() {
   return (
     <>
       <Navigation />
+      <AboutMissionPopup targetId="about-details" />
 
       <main className="site-shell space-y-4">
         <WindowPanel chromeLabel="Reno Made" tone="lilac">
@@ -41,7 +43,7 @@ export default function AboutPage() {
           </div>
         </WindowPanel>
 
-        <div className="desktop-grid items-start gap-4 lg:grid-cols-2">
+        <div id="about-details" className="desktop-grid items-start gap-4 lg:grid-cols-2">
           <WindowPanel chromeLabel="A lil chaotic shop" tone="pink">
             <div className="classic-list">
               {aboutHighlights.map((item) => (

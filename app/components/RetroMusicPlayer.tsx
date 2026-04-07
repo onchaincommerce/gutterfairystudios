@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useEffectEvent, useRef, useState } from "react";
 
 const INITIAL_VOLUME = 0.68;
@@ -51,12 +52,20 @@ export default function RetroMusicPlayer() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [trackIndex, setTrackIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isMinimized, setIsMinimized] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(true);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(INITIAL_VOLUME);
   const tracks = TRACKS;
   const currentTrack = tracks[trackIndex];
+
+  useEffect(() => {
+    document.body.dataset.playerExpanded = isMinimized ? "false" : "true";
+
+    return () => {
+      delete document.body.dataset.playerExpanded;
+    };
+  }, [isMinimized]);
 
   const handleTrackStep = (direction: -1 | 1) => {
     if (!tracks.length) {
@@ -325,8 +334,6 @@ export default function RetroMusicPlayer() {
     audio.pause();
   };
 
-  const progress = duration > 0 ? (currentTime / duration) * 100 : 0;
-
   return (
     <div
       className={`retro-player ${isMinimized ? "retro-player--minimized" : ""}`.trim()}
@@ -335,9 +342,19 @@ export default function RetroMusicPlayer() {
       <div className="site-shell">
         {isMinimized ? (
           <div className="retro-player__mini">
+            <div className="retro-player__mini-badge" aria-hidden="true">
+              <Image
+                src="/fairy.png"
+                alt=""
+                fill
+                sizes="44px"
+                className="object-contain"
+              />
+            </div>
+
             <button
               type="button"
-              className="retro-player__button retro-player__button--play"
+              className="retro-player__button retro-player__button--play retro-player__button--compact"
               onClick={handlePlayPause}
               aria-label={isPlaying ? "Pause track" : "Play track"}
               disabled={!currentTrack}
@@ -346,53 +363,57 @@ export default function RetroMusicPlayer() {
             </button>
 
             <div className="retro-player__mini-copy">
-              <p className="retro-player__mini-label">Now playing</p>
+              <p className="retro-player__mini-label">Studio player</p>
               <p className="retro-player__mini-title">
                 {currentTrack?.title ?? "Loading player"}
               </p>
             </div>
 
-            <div className="retro-player__mini-status">
-              <span className="retro-player__time">{formatTime(currentTime)}</span>
-              <span className="retro-player__divider">/</span>
-              <span className="retro-player__time">{formatTime(duration)}</span>
-            </div>
+            <div className="retro-player__mini-actions">
+              <div className="retro-player__mini-status">
+                <span className="retro-player__time">{formatTime(currentTime)}</span>
+                <span className="retro-player__divider">/</span>
+                <span className="retro-player__time">{formatTime(duration)}</span>
+              </div>
 
-            <button
-              type="button"
-              className="retro-player__chrome-button"
-              onClick={() => setIsMinimized(false)}
-              aria-label="Expand music player"
-              data-ui-sound="expand"
-            >
-              ▢
-            </button>
-          </div>
-        ) : (
-          <>
-            <div className="retro-player__topbar">
-              <input
-                type="range"
-                min={0}
-                max={duration || 1}
-                step={0.01}
-                value={Math.min(currentTime, duration || 1)}
-                onChange={(event) => handleSeek(Number(event.target.value))}
-                className="retro-player__seek"
-                aria-label="Song progress"
-              />
               <button
                 type="button"
                 className="retro-player__chrome-button"
-                onClick={() => setIsMinimized(true)}
-                aria-label="Minimize music player"
-                data-ui-sound="minimize"
+                onClick={() => setIsMinimized(false)}
+                aria-label="Expand music player"
+                data-ui-sound="expand"
               >
-                _
+                ▢
               </button>
             </div>
+          </div>
+        ) : (
+          <div className="retro-player__panel">
+            <div className="retro-player__pod">
+              <div className="retro-player__pod-top">
+                <div className="retro-player__badge-shell" aria-hidden="true">
+                  <div className="retro-player__badge">
+                    <Image
+                      src="/fairy.png"
+                      alt=""
+                      fill
+                      sizes="60px"
+                      className="object-contain"
+                    />
+                  </div>
+                </div>
 
-            <div className="retro-player__panel">
+                <button
+                  type="button"
+                  className="retro-player__button retro-player__button--play retro-player__button--hero"
+                  onClick={handlePlayPause}
+                  aria-label={isPlaying ? "Pause track" : "Play track"}
+                  disabled={!currentTrack}
+                >
+                  {isPlaying ? "||" : ">"}
+                </button>
+              </div>
+
               <div className="retro-player__transport" role="group" aria-label="Player controls">
                 <button
                   type="button"
@@ -432,46 +453,83 @@ export default function RetroMusicPlayer() {
                 </button>
               </div>
 
-              <div className="retro-player__song">
+              <span
+                className={`retro-player__power ${isPlaying ? "retro-player__power--active" : ""}`.trim()}
+                aria-hidden="true"
+              />
+            </div>
+
+            <div className="retro-player__display-shell">
+              <div className="retro-player__screen">
+                <div className="retro-player__screen-top">
+                  <p className="retro-player__screen-label">Gutter Fairy player</p>
+                  <button
+                    type="button"
+                    className="retro-player__chrome-button"
+                    onClick={() => setIsMinimized(true)}
+                    aria-label="Minimize music player"
+                    data-ui-sound="minimize"
+                  >
+                    _
+                  </button>
+                </div>
+
+                <div className="retro-player__song">
+                  <div className="retro-player__copy">
+                    <p className="retro-player__label">
+                      {currentTrack?.title ?? "Loading player"}
+                    </p>
+                    <p className="retro-player__subtitle">
+                      {currentTrack?.subtitle ?? "building retro mix"}
+                    </p>
+                  </div>
+
+                  <div className="retro-player__status">
+                    <span className="retro-player__time">{formatTime(currentTime)}</span>
+                    <span className="retro-player__divider">/</span>
+                    <span className="retro-player__time">{formatTime(duration)}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="retro-player__strip">
                 <div className={`retro-player__equalizer ${isPlaying ? "retro-player__equalizer--active" : ""}`} aria-hidden="true">
                   {Array.from({ length: 8 }, (_, index) => (
                     <span key={index} className="retro-player__bar" />
                   ))}
                 </div>
 
-                <div className="retro-player__copy">
-                  <p className="retro-player__label">
-                    Song: {currentTrack?.title ?? "Loading player"}
-                  </p>
-                  <p className="retro-player__subtitle">
-                    {currentTrack?.subtitle ?? "building retro mix"}
-                  </p>
-                </div>
-              </div>
-
-              <div className="retro-player__status">
-                <span className="retro-player__time">{formatTime(currentTime)}</span>
-                <span className="retro-player__divider">/</span>
-                <span className="retro-player__time">{formatTime(duration)}</span>
-              </div>
-
-              <label className="retro-player__volume-shell">
-                <span className="retro-player__volume-label">Vol</span>
                 <input
                   type="range"
                   min={0}
-                  max={1}
+                  max={duration || 1}
                   step={0.01}
-                  value={volume}
-                  onChange={(event) => setVolume(Number(event.target.value))}
-                  className="retro-player__volume"
-                  aria-label="Volume"
+                  value={Math.min(currentTime, duration || 1)}
+                  onChange={(event) => handleSeek(Number(event.target.value))}
+                  className="retro-player__seek"
+                  aria-label="Song progress"
                 />
-              </label>
+              </div>
 
-              <div className="retro-player__gloss" style={{ width: `${Math.max(progress, 10)}%` }} />
+              <div className="retro-player__footer">
+                <p className="retro-player__footer-copy">Five-song studio playlist</p>
+
+                <label className="retro-player__volume-shell">
+                  <span className="retro-player__volume-label">Vol</span>
+                  <input
+                    type="range"
+                    min={0}
+                    max={1}
+                    step={0.01}
+                    value={volume}
+                    onChange={(event) => setVolume(Number(event.target.value))}
+                    className="retro-player__volume"
+                    aria-label="Volume"
+                  />
+                </label>
+              </div>
             </div>
-          </>
+          </div>
         )}
 
         <audio ref={audioRef} preload="metadata" />

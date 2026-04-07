@@ -3,6 +3,7 @@ import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import RetroMusicPlayer from "./components/RetroMusicPlayer";
 import ScrollBackground from "./components/ScrollBackground";
+import SiteBootIntro from "./components/SiteBootIntro";
 import UISoundEffects from "./components/UISoundEffects";
 
 export const metadata: Metadata = {
@@ -24,6 +25,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased relative">
         <ScrollBackground />
+        <SiteBootIntro />
         <UISoundEffects />
         <div className="desktop-page">
           {children}
