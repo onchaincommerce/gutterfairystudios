@@ -4,36 +4,32 @@ import Image from "next/image";
 import { useEffect, useEffectEvent, useRef, useState } from "react";
 
 const INITIAL_VOLUME = 0.68;
+const MOBILE_PLAYER_MEDIA_QUERY = "(max-width: 767px)";
 const TRACKS = [
   {
-    id: "night-switch",
-    title: "Night Switch",
-    subtitle: "Angular indie-rock energy",
-    src: "/diverse_five_song_set_v1/01_night_switch.wav",
+    id: "neon-ritual",
+    title: "Neon Ritual",
+    src: "/diverse_five_song_set_v1/03_neon_ritual.wav",
   },
   {
     id: "city-static",
     title: "City Static",
-    subtitle: "Punchy jangle and fast motion",
     src: "/diverse_five_song_set_v1/02_city_static.wav",
   },
   {
-    id: "neon-ritual",
-    title: "Neon Ritual",
-    subtitle: "Colorful art-pop groove",
-    src: "/diverse_five_song_set_v1/03_neon_ritual.wav",
-  },
-  {
     id: "satellite-romance",
-    title: "Satellite Romance",
-    subtitle: "Retro-futurist synth-pop hook",
+    title: "Satilite Romance",
     src: "/diverse_five_song_set_v1/04_satellite_romance.wav",
   },
   {
     id: "afterglow-complex",
     title: "Afterglow Complex",
-    subtitle: "Dreamy club euphoria",
     src: "/diverse_five_song_set_v1/05_afterglow_complex.wav",
+  },
+  {
+    id: "night-switch",
+    title: "Night Switch",
+    src: "/diverse_five_song_set_v1/01_night_switch.wav",
   },
 ] as const;
 
@@ -53,19 +49,45 @@ export default function RetroMusicPlayer() {
   const [trackIndex, setTrackIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMinimized, setIsMinimized] = useState(true);
+  const [isMobileViewport, setIsMobileViewport] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(INITIAL_VOLUME);
   const tracks = TRACKS;
   const currentTrack = tracks[trackIndex];
+  const canExpand = !isMobileViewport;
+  const isExpanded = !isMinimized && canExpand;
 
   useEffect(() => {
-    document.body.dataset.playerExpanded = isMinimized ? "false" : "true";
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const mediaQuery = window.matchMedia(MOBILE_PLAYER_MEDIA_QUERY);
+    const syncViewportState = (matches: boolean) => {
+      setIsMobileViewport(matches);
+    };
+
+    syncViewportState(mediaQuery.matches);
+
+    const handleChange = (event: MediaQueryListEvent) => {
+      syncViewportState(event.matches);
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+
+    return () => {
+      mediaQuery.removeEventListener("change", handleChange);
+    };
+  }, []);
+
+  useEffect(() => {
+    document.body.dataset.playerExpanded = isExpanded ? "true" : "false";
 
     return () => {
       delete document.body.dataset.playerExpanded;
     };
-  }, [isMinimized]);
+  }, [isExpanded]);
 
   const handleTrackStep = (direction: -1 | 1) => {
     if (!tracks.length) {
@@ -336,11 +358,11 @@ export default function RetroMusicPlayer() {
 
   return (
     <div
-      className={`retro-player ${isMinimized ? "retro-player--minimized" : ""}`.trim()}
+      className={`retro-player ${!isExpanded ? "retro-player--minimized" : ""}`.trim()}
       aria-label="Site music player"
     >
       <div className="site-shell">
-        {isMinimized ? (
+        {!isExpanded ? (
           <div className="retro-player__mini">
             <div className="retro-player__mini-badge" aria-hidden="true">
               <Image
@@ -376,15 +398,17 @@ export default function RetroMusicPlayer() {
                 <span className="retro-player__time">{formatTime(duration)}</span>
               </div>
 
-              <button
-                type="button"
-                className="retro-player__chrome-button"
-                onClick={() => setIsMinimized(false)}
-                aria-label="Expand music player"
-                data-ui-sound="expand"
-              >
-                ▢
-              </button>
+              {canExpand ? (
+                <button
+                  type="button"
+                  className="retro-player__chrome-button"
+                  onClick={() => setIsMinimized(false)}
+                  aria-label="Expand music player"
+                  data-ui-sound="expand"
+                >
+                  ▢
+                </button>
+              ) : null}
             </div>
           </div>
         ) : (
@@ -478,9 +502,6 @@ export default function RetroMusicPlayer() {
                   <div className="retro-player__copy">
                     <p className="retro-player__label">
                       {currentTrack?.title ?? "Loading player"}
-                    </p>
-                    <p className="retro-player__subtitle">
-                      {currentTrack?.subtitle ?? "building retro mix"}
                     </p>
                   </div>
 

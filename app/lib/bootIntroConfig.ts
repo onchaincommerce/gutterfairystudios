@@ -1,8 +1,9 @@
 export const bootIntroConfig = {
   systemName: "GUTTER FAIRY OS",
   version: "GF_01",
-  lineRevealDelayMs: 360,
-  lineRevealIntervalMs: 420,
+  startDelayMs: 280,
+  typingCharIntervalMs: 22,
+  linePauseMs: 170,
   holdAfterCompleteMs: 850,
   fadeOutMs: 520,
   lines: [

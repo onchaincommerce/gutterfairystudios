@@ -33,7 +33,7 @@ export default function Navigation() {
               aria-expanded={isOpen}
               aria-controls="desktop-primary-nav"
             >
-              Menu
+              Start
             </button>
 
             <div

@@ -65,17 +65,35 @@ function resolveShouldPlayIntro() {
 
 export default function SiteBootIntro() {
   const [shouldRender, setShouldRender] = useState(false);
-  const [visibleLineCount, setVisibleLineCount] = useState(0);
+  const [completedLineCount, setCompletedLineCount] = useState(0);
+  const [activeLineCharCount, setActiveLineCharCount] = useState(0);
   const [isLeaving, setIsLeaving] = useState(false);
 
-  const totalLines = bootIntroConfig.lines.length;
+  const terminalLines = useMemo(
+    () =>
+      bootIntroConfig.lines.map(({ label, value }) => {
+        return `${label}: ${value}`;
+      }),
+    [],
+  );
+  const totalLines = terminalLines.length;
+  const totalCharacterCount = useMemo(() => {
+    return terminalLines.reduce((sum, line) => sum + line.length, 0);
+  }, [terminalLines]);
+  const typedCharacterCount = useMemo(() => {
+    const completedCharacters = terminalLines
+      .slice(0, completedLineCount)
+      .reduce((sum, line) => sum + line.length, 0);
+
+    return completedCharacters + activeLineCharCount;
+  }, [activeLineCharCount, completedLineCount, terminalLines]);
   const progress = useMemo(() => {
     if (!shouldRender) {
       return 0;
     }
 
-    return Math.max(8, (visibleLineCount / totalLines) * 100);
-  }, [shouldRender, totalLines, visibleLineCount]);
+    return Math.max(8, (typedCharacterCount / Math.max(totalCharacterCount, 1)) * 100);
+  }, [shouldRender, totalCharacterCount, typedCharacterCount]);
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -114,39 +132,62 @@ export default function SiteBootIntro() {
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
-    const timeouts: number[] = [];
-    const { lineRevealDelayMs, lineRevealIntervalMs, holdAfterCompleteMs, fadeOutMs } = bootIntroConfig;
-
-    bootIntroConfig.lines.forEach((_, index) => {
-      const timeoutId = window.setTimeout(() => {
-        setVisibleLineCount(index + 1);
-      }, lineRevealDelayMs + index * lineRevealIntervalMs);
-
-      timeouts.push(timeoutId);
-    });
-
-    const revealCompleteAt = lineRevealDelayMs + totalLines * lineRevealIntervalMs;
-    timeouts.push(
-      window.setTimeout(() => {
-        setIsLeaving(true);
-      }, revealCompleteAt + holdAfterCompleteMs),
-    );
-
-    timeouts.push(
-      window.setTimeout(() => {
-        setShouldRender(false);
-      }, revealCompleteAt + holdAfterCompleteMs + fadeOutMs),
-    );
-
     return () => {
       document.body.style.overflow = previousOverflow;
-      timeouts.forEach((timeoutId) => window.clearTimeout(timeoutId));
     };
-  }, [shouldRender, totalLines]);
+  }, [shouldRender]);
+
+  useEffect(() => {
+    if (!shouldRender) {
+      return;
+    }
+
+    if (completedLineCount >= terminalLines.length) {
+      const leaveId = window.setTimeout(() => {
+        setIsLeaving(true);
+      }, bootIntroConfig.holdAfterCompleteMs);
+      const hideId = window.setTimeout(() => {
+        setShouldRender(false);
+      }, bootIntroConfig.holdAfterCompleteMs + bootIntroConfig.fadeOutMs);
+
+      return () => {
+        window.clearTimeout(leaveId);
+        window.clearTimeout(hideId);
+      };
+    }
+
+    const activeLine = terminalLines[completedLineCount];
+    const isStarting = completedLineCount === 0 && activeLineCharCount === 0;
+    const isLineComplete = activeLineCharCount >= activeLine.length;
+    const nextDelay = isStarting
+      ? bootIntroConfig.startDelayMs
+      : isLineComplete
+        ? bootIntroConfig.linePauseMs
+        : bootIntroConfig.typingCharIntervalMs;
+
+    const stepId = window.setTimeout(() => {
+      if (isLineComplete) {
+        setCompletedLineCount((current) => current + 1);
+        setActiveLineCharCount(0);
+        return;
+      }
+
+      setActiveLineCharCount((current) => current + 1);
+    }, nextDelay);
+
+    return () => {
+      window.clearTimeout(stepId);
+    };
+  }, [activeLineCharCount, completedLineCount, shouldRender, terminalLines]);
 
   if (!shouldRender) {
     return null;
   }
+
+  const activeLine =
+    completedLineCount < terminalLines.length
+      ? terminalLines[completedLineCount].slice(0, activeLineCharCount)
+      : "";
 
   return (
     <div
@@ -175,19 +216,25 @@ export default function SiteBootIntro() {
         </div>
 
         <div className="boot-intro__terminal">
-          {bootIntroConfig.lines.slice(0, visibleLineCount).map((line, index) => (
+          {terminalLines.slice(0, completedLineCount).map((line, index) => (
             <div
-              key={`${line.label}-${index}`}
+              key={`${line}-${index}`}
               className={`boot-intro__line ${index === totalLines - 1 ? "boot-intro__line--final" : ""}`.trim()}
             >
-              <span className="boot-intro__label">{line.label}</span>
-              <span className="boot-intro__value">{line.value}</span>
+              <span className="boot-intro__prompt" aria-hidden="true">
+                &gt;
+              </span>
+              <span className="boot-intro__terminal-copy">{line}</span>
             </div>
           ))}
 
-          {visibleLineCount < totalLines ? (
+          {completedLineCount < totalLines ? (
             <div className="boot-intro__line boot-intro__line--cursor" aria-hidden="true">
-              <span className="boot-intro__cursor" />
+              <span className="boot-intro__prompt">&gt;</span>
+              <span className="boot-intro__terminal-copy">
+                {activeLine}
+                <span className="boot-intro__cursor" />
+              </span>
             </div>
           ) : null}
         </div>
