@@ -70,9 +70,22 @@ export default function Navigation() {
                   href={instagramLink}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="nav-button"
+                  className="nav-button nav-button--icon"
+                  aria-label="Instagram"
+                  title="Instagram"
                 >
-                  Instagram
+                  <svg
+                    aria-hidden="true"
+                    viewBox="0 0 24 24"
+                    className="nav-button__icon"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      clipRule="evenodd"
+                      d="M7.25 2.5A4.75 4.75 0 0 0 2.5 7.25v9.5a4.75 4.75 0 0 0 4.75 4.75h9.5a4.75 4.75 0 0 0 4.75-4.75v-9.5a4.75 4.75 0 0 0-4.75-4.75h-9.5Zm9 2a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5ZM12 7.25A4.75 4.75 0 1 0 12 16.75 4.75 4.75 0 0 0 12 7.25Zm-2.75 4.75a2.75 2.75 0 1 1 5.5 0 2.75 2.75 0 0 1-5.5 0Z"
+                    />
+                  </svg>
                 </a>
               </div>
             </div>

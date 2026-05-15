@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import WindowDots from "./WindowDots";
 
 const missionCopy =
-  "Gutter Fairy exists to make self-expression accessible through reclaimed clothing, hands-on creativity, and community learning.";
+  "Gutter Fairy exists to push back against textile waste by making secondhand fashion, clothing repair, and creative community spaces more accessible.";
 
 type AboutMissionPopupProps = {
   targetId: string;

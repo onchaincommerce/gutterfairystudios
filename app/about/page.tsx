@@ -26,69 +26,98 @@ export default function AboutPage() {
             </div>
 
             <div className="welcome-copy">
-              <h1 className="page-title">Reclaim your Magic</h1>
+              <h1 className="page-title">Trash the System, Not Your Clothes</h1>
               <p className="page-copy">
-                Gutter Fairy started with thrifted clothes and the need to make something out of
-                what most people overlook.
+                Gutter Fairy exists because the fashion industry encourages overconsumption while
+                millions of pounds of clothing end up in landfills every year.
               </p>
               <p className="page-copy">
-                We host workshops where people show up with their own clothes, sit side by side,
-                and learn how to rework them into something that actually feels like theirs.
+                We believe buying secondhand, keeping clothes in circulation, and learning to
+                rework what already exists are small but meaningful ways to push back against that
+                cycle.
               </p>
               <p className="page-copy">
-                We keep this going through patches and secondhand pieces, reworked by hand and
-                put back into rotation so they can keep being worn, not wasted.
+                Through curated secondhand sourcing, handmade reworks, and monthly SCRAP SOCIAL
+                workshops, we’re building community around creativity, sustainability, and wearing
+                clothes that actually mean something to the people who own them.
               </p>
             </div>
           </div>
         </WindowPanel>
 
         <div id="about-details" className="desktop-grid items-start gap-4 lg:grid-cols-2">
-          <WindowPanel chromeLabel="A lil chaotic shop" tone="pink">
-            <div className="classic-list">
-              {aboutHighlights.map((item) => (
-                <article key={item.title} className="classic-list__item">
-                  <h2 className="classic-list__title">{item.title}</h2>
-                  <p className="classic-list__body">{item.body}</p>
-                  <p className="classic-list__note">{item.note}</p>
-                </article>
-              ))}
-            </div>
-          </WindowPanel>
+          <div className="content-column">
+            <WindowPanel chromeLabel="Workshop Funding" tone="cream">
+              <section className="funding-panel" aria-labelledby="funding-heading">
+                <div className="funding-panel__card">
+                  <h2 id="funding-heading" className="section-title">
+                    Keep Scrap Social Free
+                  </h2>
+
+                  <p className="body-copy">
+                    We keep our monthly upcycling workshops free through community
+                    support, secondhand shopping, and donations. Every thrifted piece,
+                    handmade patch, and reworked garment purchased through Gutter Fairy
+                    helps fund supplies, shared creative space, and beginner-friendly
+                    workshops focused on keeping textiles in circulation longer.
+                  </p>
+
+                  <div className="funding-panel__cta">
+                    <a
+                      href={depopLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="win-button utility-button-inline"
+                    >
+                      Shop
+                    </a>
+                  </div>
+                </div>
+              </section>
+            </WindowPanel>
+
+            <WindowPanel chromeLabel="A lil chaotic shop" tone="pink">
+              <div className="classic-list">
+                {aboutHighlights.map((item) => (
+                  <article key={item.title} className="classic-list__item">
+                    <h2 className="classic-list__title">{item.title}</h2>
+                    <p className="classic-list__body">{item.body}</p>
+                    <p className="classic-list__note">{item.note}</p>
+                  </article>
+                ))}
+              </div>
+            </WindowPanel>
+          </div>
 
           <WindowPanel chromeLabel="The process" tone="blue">
             <div className="process-chat">
               <div className="process-chat__header">
-                <span className="process-chat__room"># workroom</span>
+                <span className="process-chat__room">#workroom</span>
                 <span className="process-chat__count">{shopSteps.length} steps live</span>
               </div>
 
               <div className="process-chat__messages">
                 {shopSteps.map((step, index) => (
-                  <article key={step.title} className="process-chat__message">
-                    <div className="process-chat__avatar" aria-hidden="true">
-                      {index + 1}
+                  <details key={step.title} className="process-chat__entry">
+                    <summary className="process-chat__summary">
+                      <h2 className="process-chat__title">
+                        {index + 1} ✶ {step.title}
+                      </h2>
+                      <span className="process-chat__status" aria-hidden="true">
+                        Open
+                      </span>
+                    </summary>
+
+                    <div className="process-chat__body">
+                      {step.body.map((paragraph) => (
+                        <p key={paragraph} className="process-chat__paragraph">
+                          {paragraph}
+                        </p>
+                      ))}
                     </div>
-                    <div className="process-chat__bubble">
-                      <p className="process-chat__meta">gutterfairy_system</p>
-                      <h2 className="process-chat__title">{step.title}</h2>
-                      <p className="classic-list__body">{step.body}</p>
-                    </div>
-                  </article>
+                  </details>
                 ))}
               </div>
-            </div>
-
-            <div className="news-footer">
-              <span>Reworked pieces land on Depop when they are ready.</span>
-              <a
-                href={depopLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="win-button utility-button-inline"
-              >
-                Shop
-              </a>
             </div>
           </WindowPanel>
         </div>

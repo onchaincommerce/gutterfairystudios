@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import OrderPatchButton from "./OrderPatchButton";
 import WindowPanel from "./WindowPanel";
 import { homeNews, newestAdditions } from "../data/siteContent";
 
@@ -52,12 +51,6 @@ export default function HomeSection() {
                   <h2 className="addition-title">{item.title}</h2>
                   <p className="addition-description">{item.description}</p>
                   <p className="catalog-price">{PLACEHOLDER_PRICE}</p>
-                  <div className="addition-actions">
-                    <OrderPatchButton
-                      buttonLabel="Order patch"
-                      initialPatchTitle={item.patchTitle}
-                    />
-                  </div>
                 </article>
               ))}
             </div>
@@ -72,7 +65,7 @@ export default function HomeSection() {
         </div>
 
         <aside className="sidebar-column">
-          <WindowPanel chromeLabel="Studio Events" tone="pink">
+          <WindowPanel chromeLabel="Scraps Social Second Sundays" tone="pink">
             <div className="event-files">
               {homeNews.map((item, index) => (
                 <details key={item.id} className="event-file" open={index === 0}>
@@ -86,8 +79,11 @@ export default function HomeSection() {
                   </summary>
 
                   <div className="event-file__body">
-                    <p className="news-body">{item.summary}</p>
-                    <p className="news-body event-file__details">{item.details}</p>
+                    {(item.body ?? [item.summary, item.details].filter(Boolean)).map((paragraph) => (
+                      <p key={paragraph} className="news-body event-file__details">
+                        {paragraph}
+                      </p>
+                    ))}
                     {item.image ? (
                       <div className="event-file__poster">
                         <Image

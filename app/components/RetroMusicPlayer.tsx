@@ -392,6 +392,31 @@ export default function RetroMusicPlayer() {
             </div>
 
             <div className="retro-player__mini-actions">
+              <div
+                className="retro-player__mini-transport"
+                role="group"
+                aria-label="Mini player controls"
+              >
+                <button
+                  type="button"
+                  className="retro-player__button retro-player__button--mini-step"
+                  onClick={() => handleTrackStep(-1)}
+                  aria-label="Previous track"
+                  disabled={tracks.length <= 1}
+                >
+                  {"<<"}
+                </button>
+                <button
+                  type="button"
+                  className="retro-player__button retro-player__button--mini-step"
+                  onClick={() => handleTrackStep(1)}
+                  aria-label="Next track"
+                  disabled={tracks.length <= 1}
+                >
+                  {">>"}
+                </button>
+              </div>
+
               <div className="retro-player__mini-status">
                 <span className="retro-player__time">{formatTime(currentTime)}</span>
                 <span className="retro-player__divider">/</span>

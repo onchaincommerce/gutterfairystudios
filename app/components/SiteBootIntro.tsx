@@ -208,11 +208,10 @@ export default function SiteBootIntro() {
               />
             </div>
             <div>
-              <p className="boot-intro__system">{bootIntroConfig.systemName}</p>
-              <p className="boot-intro__version">VERSION {bootIntroConfig.version}</p>
+              <p className="boot-intro__system">{bootIntroConfig.established}</p>
             </div>
           </div>
-          <p className="boot-intro__stamp">Patchwork Recovery</p>
+          <p className="boot-intro__stamp">{bootIntroConfig.stamp}</p>
         </div>
 
         <div className="boot-intro__terminal">

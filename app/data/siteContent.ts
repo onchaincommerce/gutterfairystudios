@@ -1,7 +1,7 @@
 export const depopLink = "https://www.depop.com/gutterfairystudio/";
 export const instagramLink = "https://www.instagram.com/gutterfairystudios/";
 export const workshopLink =
-  "https://partiful.com/e/aKkRd9JI82mygBcxJh9A?c=EDVEI04n";
+  "https://partiful.com/e/ZVIPIO9rvb4uA7FjX4ei?";
 
 export type CatalogItem = {
   id: string;
@@ -26,6 +26,7 @@ export type HomeNewsItem = {
   title: string;
   summary: string;
   details: string;
+  body?: string[];
   href: string;
   cta: string;
   image?: string;
@@ -40,7 +41,7 @@ export type AboutHighlight = {
 
 export type ProcessStep = {
   title: string;
-  body: string;
+  body: string[];
 };
 
 export const designCatalog: CatalogItem[] = [
@@ -112,14 +113,20 @@ export const newestAdditions: NewestAddition[] = [
 export const homeNews: HomeNewsItem[] = [
   {
     id: "news-patch-bar",
-    date: "Jun 21",
-    title: "Patch Bar workshop",
-    summary: "Beginner-friendly patch night in Reno with space to make one patch and take it home the same day.",
-    details: "This one is set up for beginners, so you can show up, learn the basics, make your patch on site, and leave with something finished instead of half-started.",
+    date: "June 14th",
+    title: "PATCH BAR",
+    summary: "",
+    details: "",
+    body: [
+      "SCRAP SOCIAL ✶ patch bar happy hour",
+      "we’re kicking off our first monthly upcycling night in downtown Reno ♡",
+      "this beginner-friendly session is all about learning simple hand sewing, making your own patch, and customizing your clothes in community.",
+      "show up with something you want to rework and leave with a finished piece you can wear all year long.",
+    ],
     href: workshopLink,
     cta: "RSVP",
-    image: "/patch-bar-poster.png",
-    imageAlt: "Gutter Fairy Patch Bar poster",
+    image: "/Scraps%20Social%20Patch%20Bar.png",
+    imageAlt: "Scraps Social Patch Bar poster",
   },
   {
     id: "news-stitch-table",
@@ -162,18 +169,39 @@ export const aboutHighlights: AboutHighlight[] = [
 export const shopSteps: ProcessStep[] = [
   {
     title: "SOURCING",
-    body: "We dig for pieces worth saving—good bones, worn-in, a little imperfect.",
+    body: [
+      "Every week we search thrift stores, estate sales, donation piles, and the bins to find clothing with good bones, unique textures, and personality.",
+    ],
   },
   {
     title: "CLEANING",
-    body: "Everything gets stripped back and reset.",
+    body: [
+      "Differnent fabrics need special care. Once pieces make it back to the studio, everything is carefully cleaned, repaired, and refreshed by hand.",
+    ],
+  },
+  {
+    title: "THE DROP",
+    body: [
+      "Every week we post fresh thrift finds, vintage gems, and chaotic little treasures on TikTok and Instagram before they hit the shop. Thursday hauls, Friday story sales, and weekly Depop drops keep the rotation moving .",
+    ],
   },
   {
     title: "REWORKING",
-    body: "Paint, thread, patches—done by hand, no two the same.",
+    body: [
+      "Not everything is wearable but that doesn't mean it's trash so reworking is a huge part of our process. Some pieces get patched, dyed, embroidered, altered, or completely transformed into something new.",
+    ],
   },
   {
     title: "DESIGNING",
-    body: "Built to be added, layered, and made your own.",
+    body: [
+      "Looking for something more personal? We also create one-of-one custom pieces using secondhand textiles, handmade patches, embroidery, appliqué, and upcycled materials. Whether you have a vision already or just a vibe in mind, we can build something together that feels uniquely yours.",
+    ],
+  },
+  {
+    title: "GET INVOLVED",
+    body: [
+      "Fast fashion creates an overwhelming amount of textile waste, but small choices made in community still matter. Shopping secondhand, repairing clothes, reworking old pieces, and learning creative skills all help keep textiles in circulation longer instead of ending up in landfill.",
+      "If you want to be part of it, join us at SCRAP SOCIAL every second Sunday of the month to learn how to rework your clothes, connect with community, and give forgotten pieces a second life.",
+    ],
   },
 ];

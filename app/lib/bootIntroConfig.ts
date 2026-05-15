@@ -1,6 +1,8 @@
 export const bootIntroConfig = {
   systemName: "GUTTER FAIRY OS",
-  version: "GF_01",
+  version: "Chaos Studio",
+  established: "Established: 2025",
+  stamp: "Textile Recovery",
   startDelayMs: 280,
   typingCharIntervalMs: 22,
   linePauseMs: 170,
@@ -8,15 +10,18 @@ export const bootIntroConfig = {
   fadeOutMs: 520,
   lines: [
     { label: "SYSTEM NAME", value: "GUTTER FAIRY OS" },
-    { label: "VERSION", value: "GF_01" },
-    { label: "USER", value: "Fairy Operator" },
-    { label: "MODE", value: "Patchwork Recovery" },
-    { label: "STYLE ENGINE", value: "Thrift + Rework + Chaos" },
-    { label: "MODULES LOADED", value: "Embroidery, Applique, Reworked Denim, DIY Magic" },
-    { label: "AESTHETIC DRIVER", value: "Soft Grunge / Trash Pixie / Handmade Future" },
-    { label: "LOCATION", value: "Reno, NV" },
-    { label: "STATUS", value: "Booting weird girl wardrobe..." },
-    { label: "FINAL LINE", value: "Welcome to Gutter Fairy" },
+    { label: "VERSION", value: "Chaos Studio" },
+    { label: "USER", value: "Fairy" },
+    { label: "STYLE ENGINE", value: "Thrift + Rework + Sustainability" },
+    {
+      label: "MODULES LOADED",
+      value: "Embroidery, Applique, Reworked Denim, and Secondhand Magic",
+    },
+    { label: "AESTHETIC DRIVER", value: "Vintage, 90's, Y2K, and Fairycore" },
+    {
+      label: "LOCATION",
+      value: "39.53° N latitude and 119.81° W longitude",
+    },
   ],
 } as const;
 

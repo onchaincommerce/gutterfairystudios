@@ -291,6 +291,19 @@ body[data-player-expanded="true"] .desktop-page {
   background: #e4dfd3;
 }
 
+.nav-button--icon {
+  min-width: 3rem;
+  padding-inline: 0.75rem;
+  line-height: 0;
+}
+
+.nav-button__icon {
+  display: block;
+  width: 1.2rem;
+  height: 1.2rem;
+  flex: none;
+}
+
 .nav-utility {
   display: flex;
   gap: 0.55rem;
@@ -1153,6 +1166,74 @@ body[data-player-expanded="true"] .desktop-page {
   color: #7a4f7a;
 }
 
+.funding-panel {
+  display: grid;
+}
+
+.funding-panel__card {
+  position: relative;
+  display: grid;
+  gap: 0.9rem;
+  border: 2px solid var(--line-mid);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(255, 248, 240, 0.92)),
+    linear-gradient(135deg, rgba(241, 215, 230, 0.24), rgba(213, 232, 222, 0.24));
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.95),
+    inset -1px -1px 0 rgba(179, 174, 164, 0.75);
+  padding: 0.9rem;
+  overflow: hidden;
+}
+
+.funding-panel__card::before,
+.funding-panel__card::after {
+  content: "";
+  position: absolute;
+  width: 4.25rem;
+  height: 4.25rem;
+  border: 2px dashed rgba(122, 79, 122, 0.34);
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+.funding-panel__card::before {
+  top: -1.85rem;
+  right: -1.3rem;
+  background: rgba(243, 208, 226, 0.36);
+}
+
+.funding-panel__card::after {
+  bottom: -2.1rem;
+  left: -1.45rem;
+  background: rgba(204, 226, 213, 0.34);
+}
+
+.funding-panel__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.funding-panel__chip {
+  display: inline-flex;
+  align-items: center;
+  border: 2px dashed #b793b3;
+  background: rgba(255, 255, 255, 0.78);
+  padding: 0.28rem 0.55rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #7a4f7a;
+}
+
+.funding-panel__cta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding-top: 0.2rem;
+}
+
 .process-files {
   display: grid;
   gap: 0.75rem;
@@ -1184,8 +1265,7 @@ body[data-player-expanded="true"] .desktop-page {
 }
 
 .process-chat__room,
-.process-chat__count,
-.process-chat__meta {
+.process-chat__count {
   font-size: 0.74rem;
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -1207,54 +1287,78 @@ body[data-player-expanded="true"] .desktop-page {
   gap: 0.75rem;
 }
 
-.process-chat__message {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 0.65rem;
-  align-items: start;
-}
-
-.process-chat__avatar {
-  min-width: 2.25rem;
-  border: 2px solid #5c6b82;
-  background: linear-gradient(180deg, #fefcf8 0%, #d6e2f7 100%);
-  box-shadow:
-    inset 1px 1px 0 rgba(255, 255, 255, 0.9),
-    inset -1px -1px 0 rgba(114, 114, 114, 0.25);
-  padding: 0.45rem 0.35rem;
-  font-family: var(--font-display);
-  font-size: 0.78rem;
-  font-weight: 700;
-  line-height: 1;
-  text-align: center;
-  color: #23438a;
-}
-
-.process-chat__bubble {
+.process-chat__entry {
   border: 2px solid var(--line-mid);
   background: #fffdf8;
   box-shadow:
     inset 1px 1px 0 rgba(255, 255, 255, 0.95),
     inset -1px -1px 0 rgba(179, 174, 164, 0.75);
-  padding: 0.75rem;
 }
 
-.process-chat__message:nth-child(even) .process-chat__bubble {
-  background: #f8f0f6;
+.process-chat__summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  list-style: none;
+  padding: 0.8rem 0.9rem;
 }
 
-.process-chat__meta {
-  text-transform: lowercase;
-  color: #48639d;
+.process-chat__summary::-webkit-details-marker {
+  display: none;
 }
 
 .process-chat__title {
-  margin-top: 0.3rem;
   font-family: var(--font-display);
   font-size: 1rem;
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+}
+
+.process-chat__status {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #48639d;
+}
+
+.process-chat__entry[open] .process-chat__summary {
+  border-bottom: 2px solid var(--line-mid);
+  background: rgba(185, 201, 238, 0.18);
+}
+
+.process-chat__entry[open] .process-chat__status {
+  color: #7a4f7a;
+}
+
+.process-chat__entry[open] .process-chat__status::before {
+  content: "Close";
+}
+
+.process-chat__entry[open] .process-chat__status {
+  color: transparent;
+  position: relative;
+}
+
+.process-chat__entry[open] .process-chat__status::before {
+  position: absolute;
+  right: 0;
+  color: #7a4f7a;
+}
+
+.process-chat__body {
+  display: grid;
+  gap: 1rem;
+  padding: 0.9rem;
+}
+
+.process-chat__paragraph {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-strong);
 }
 
 .mission-popup-shell {
@@ -1622,6 +1726,53 @@ body[data-player-expanded="true"] .desktop-page {
   color: var(--text-muted);
 }
 
+.catalog-stack {
+  display: grid;
+  gap: 1rem;
+}
+
+.collection-intro-panel,
+.collection-process-card {
+  border: 2px solid var(--line-mid);
+  background: #fbfaf6;
+  box-shadow:
+    inset 1px 1px 0 rgba(255, 255, 255, 0.95),
+    inset -1px -1px 0 rgba(179, 174, 164, 0.75);
+}
+
+.collection-intro-panel {
+  display: grid;
+  gap: 0.8rem;
+  padding: 0.9rem;
+}
+
+.collection-process-grid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.collection-process-card {
+  display: grid;
+  gap: 0.65rem;
+  padding: 0.8rem;
+}
+
+.collection-process-step {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #48639d;
+}
+
+.collection-process-copy {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
 .catalog-grid {
   display: grid;
   gap: 0.75rem;
@@ -1868,6 +2019,12 @@ body[data-player-expanded="true"] .desktop-page {
   gap: 0.55rem;
 }
 
+.retro-player__mini-transport {
+  display: none;
+  align-items: center;
+  gap: 0.4rem;
+}
+
 .retro-player__pod {
   position: relative;
   z-index: 1;
@@ -2062,6 +2219,12 @@ body[data-player-expanded="true"] .desktop-page {
 .retro-player__button--compact {
   width: 2.45rem;
   height: 2.45rem;
+}
+
+.retro-player__button--mini-step {
+  width: 2rem;
+  height: 2rem;
+  font-size: 0.62rem;
 }
 
 .retro-player__power {
@@ -2344,12 +2507,57 @@ body[data-player-expanded="true"] .desktop-page {
   }
 }
 
+@media (max-width: 960px) {
+  .desktop-toolbar__row {
+    align-items: flex-start;
+  }
+
+  .desktop-nav {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .welcome-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .fairy-stage {
+    min-height: 16rem;
+  }
+
+  .fairy-stage__sprite {
+    width: min(100%, 17rem);
+  }
+
+  .event-file__summary {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .event-file__status {
+    grid-column: 2;
+    justify-self: start;
+    margin-top: 0.15rem;
+  }
+
+  .process-chat__header,
+  .process-chat__summary {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .process-chat__status {
+    justify-self: start;
+  }
+}
+
 @media (max-width: 1080px) {
   .desktop-grid--home,
   .tool-grid {
     grid-template-columns: 1fr;
   }
 
+  .collection-process-grid,
   .welcome-layout,
   .catalog-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2421,6 +2629,7 @@ body[data-player-expanded="true"] .desktop-page {
 
   .welcome-layout,
   .additions-grid,
+  .collection-process-grid,
   .catalog-grid,
   .stats-grid,
   .tool-preview-grid {
@@ -2441,12 +2650,21 @@ body[data-player-expanded="true"] .desktop-page {
     width: 100%;
   }
 
+  .nav-utility .nav-button--icon {
+    width: auto;
+    align-self: flex-start;
+  }
+
   .window-panel--zoomed {
     width: calc(100vw - 0.75rem);
   }
 
   .window-panel--zoomed .window-body {
     max-height: calc(100vh - 4.5rem);
+  }
+
+  .window-body {
+    padding: 0.8rem;
   }
 
   .patch-carousel__item {
@@ -2468,6 +2686,10 @@ body[data-player-expanded="true"] .desktop-page {
   .retro-player__mini {
     grid-template-columns: auto auto minmax(0, 1fr) auto;
     width: 100%;
+  }
+
+  .retro-player__mini-transport {
+    display: inline-flex;
   }
 
   .retro-player__mini-status {
@@ -2565,17 +2787,15 @@ body[data-player-expanded="true"] .desktop-page {
     width: fit-content;
   }
 
-  .process-chat__header,
-  .process-chat__message {
-    grid-template-columns: 1fr;
-  }
-
   .process-chat__header {
     display: grid;
   }
 
-  .process-chat__avatar {
-    min-width: 0;
-    width: fit-content;
+  .process-chat__summary {
+    grid-template-columns: 1fr;
+  }
+
+  .process-chat__status {
+    justify-self: start;
   }
 }
